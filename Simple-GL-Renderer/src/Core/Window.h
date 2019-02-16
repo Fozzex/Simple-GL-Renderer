@@ -21,10 +21,16 @@ public:
 	inline bool Closed() const { return glfwWindowShouldClose(m_Window); }
 	inline static Window* Get() { return s_WindowInstance; }
 
+	inline GLFWwindow* Raw() const { return m_Window; }
+
 private:
 
 	GLFWwindow* m_Window;
 	std::string m_Title;
 	int m_Width, m_Height;
+
+private:
+
+	static void KeyCallback(GLFWwindow*, int, int, int, int);
 
 };

@@ -11,7 +11,7 @@ Window::Window(const std::string& title, int width, int height) :
 	VERIFY(glfwInit() == GLFW_TRUE, "Failed to initialize GLFW");
 
 	m_Window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
-	if (!m_Window)
+	if (m_Window == nullptr)
 	{
 		std::cout << "Failed to create window" << std::endl;
 		glfwTerminate();
@@ -19,6 +19,8 @@ Window::Window(const std::string& title, int width, int height) :
 	}
 
 	glfwMakeContextCurrent(m_Window);
+
+	glfwSetKeyCallback(m_Window, Window::KeyCallback);
 }
 
 Window::~Window()
@@ -37,4 +39,13 @@ void Window::EndFrame()
 {
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
+}
+
+void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	switch (action)
+	{
+	case GLFW_PRESS:
+		break;
+	}
 }

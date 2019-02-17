@@ -4,8 +4,10 @@
 #include <memory>
 #include <iostream>
 
-#include "Core.h"
-#include "Util/Singleton.h"
+#include "Core/Core.h"
+#include "Core/Util/Singleton.h"
+#include "Core/Input/Event.h"
+#include "Core/Input/EventQueue.h"
 
 class Window : public Singleton
 {
@@ -17,6 +19,8 @@ public:
 
 	void StartFrame();
 	void EndFrame();
+
+	bool PollEvent(Event& e);
 
 	inline bool Closed() const { return glfwWindowShouldClose(m_Window); }
 	inline static Window* Get() { return s_WindowInstance; }
@@ -32,5 +36,11 @@ private:
 private:
 
 	static void KeyCallback(GLFWwindow*, int, int, int, int);
+	static void CharCallback(GLFWwindow*, unsigned int);
+	static void CursorPosCallback(GLFWwindow*, double, double);
+	static void MouseButtonCallback(GLFWwindow*, int, int, int);
+	static void MouseScrollCallback(GLFWwindow*, double, double);
+	static void WindowResizeCallback(GLFWwindow*, int, int);
+	static void WindowCloseCallback(GLFWwindow*);
 
 };

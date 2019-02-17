@@ -1,4 +1,5 @@
 #include "Keyboard.h"
+#include "Core/Window/Window.h"
 
 bool Keyboard::KeyPressed(int key)
 {

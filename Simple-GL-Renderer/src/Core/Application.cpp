@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Input/Keyboard.h"
+#include "Input/Mouse.h"
 
 Application* Application::s_Instance = nullptr;
 
@@ -20,6 +21,12 @@ void Application::Run()
 {
 	while (!m_Window->Closed())
 	{
+		Event e;
+		while (m_Window->PollEvent(e))
+		{
+			this->OnEvent(e);
+		}
+
 		m_Window->StartFrame();
 		this->Update();
 		m_Window->EndFrame();

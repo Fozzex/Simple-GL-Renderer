@@ -1,14 +1,13 @@
 #include "Mouse.h"
 #include <GLFW/glfw3.h>
-#include "../Window.h"
+#include "Core/Window/Window.h"
 
 void Mouse::GetPosition(double &x, double &y)
 {
 	glfwGetCursorPos(Window::Get()->Raw(), &x, &y);
 }
 
-bool Mouse::ButtonPressed(int button, bool repeat)
+bool Mouse::ButtonPressed(int button)
 {
-	int res = glfwGetMouseButton(Window::Get()->Raw(), button);
-	return repeat ? res == GLFW_PRESS || res == GLFW_REPEAT : res == GLFW_PRESS;
+	return glfwGetMouseButton(Window::Get()->Raw(), button);
 }

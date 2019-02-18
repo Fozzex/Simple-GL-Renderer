@@ -3,6 +3,7 @@
 
 #include "Util/Singleton.h"
 #include "Core/Window/Window.h"
+#include "Core/Graphics/SceneManager.h"
 #include "Core.h"
 
 class Application : public Singleton
@@ -13,8 +14,7 @@ public:
 	Application(const std::string& title, int width, int height);
 	virtual ~Application();
 
-	virtual void OnEvent(Event& e) = 0;
-	virtual void Update() = 0;
+	void RegisterScene(Scene* scene);
 
 	void Run();
 	static Application* Get() { return s_Instance; }
@@ -22,5 +22,6 @@ public:
 private:
 
 	std::unique_ptr<Window> m_Window;
+	SceneManager m_SceneManager;
 
 };

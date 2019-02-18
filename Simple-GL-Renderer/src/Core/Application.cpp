@@ -17,6 +17,11 @@ Application::~Application()
 
 }
 
+void Application::RegisterScene(Scene* scene)
+{
+	m_SceneManager.Push(scene);
+}
+
 void Application::Run()
 {
 	while (!m_Window->Closed())
@@ -24,11 +29,11 @@ void Application::Run()
 		Event e;
 		while (m_Window->PollEvent(e))
 		{
-			this->OnEvent(e);
+			m_SceneManager.GetActiveScene()->OnEvent(e);
 		}
 
 		m_Window->StartFrame();
-		this->Update();
+		m_SceneManager.GetActiveScene()->Update();
 		m_Window->EndFrame();
 	}
 }

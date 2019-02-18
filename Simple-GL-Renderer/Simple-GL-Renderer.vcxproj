@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
+    <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
     <ClCompile Include="src\Core\Input\EventQueue.cpp" />
     <ClCompile Include="src\Core\Input\Keyboard.cpp" />
     <ClCompile Include="src\Core\Input\Mouse.cpp" />
@@ -160,6 +161,8 @@
   <ItemGroup>
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\Core.h" />
+    <ClInclude Include="src\Core\Graphics\Scene.h" />
+    <ClInclude Include="src\Core\Graphics\SceneManager.h" />
     <ClInclude Include="src\Core\Input\Event.h" />
     <ClInclude Include="src\Core\Input\EventQueue.h" />
     <ClInclude Include="src\Core\Input\Keyboard.h" />

@@ -14,5 +14,5 @@ Shader::Shader(const std::string& path)
 
 Shader::~Shader()
 {
-	glDeleteShader(m_ID);
+	GLCall(glDeleteShader(m_ID));
 }

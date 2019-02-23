@@ -24,19 +24,19 @@ Application::Application(const std::string& title, int width, int height)
 
 	m_Program->Link();
 
-	glGenVertexArrays(1, &m_VAO);
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_EBO);
+	GLCall(glGenVertexArrays(1, &m_VAO));
+	GLCall(glGenBuffers(1, &m_VBO));
+	GLCall(glGenBuffers(1, &m_EBO));
 
-	glBindVertexArray(m_VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, m_QuadData.size() * sizeof(GLfloat), m_QuadData.data(), GL_STATIC_DRAW);
+	GLCall(glBindVertexArray(m_VAO));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_VBO));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, m_QuadData.size() * sizeof(GLfloat), m_QuadData.data(), GL_STATIC_DRAW));
 	
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
-	glEnableVertexAttribArray(0);
+	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0));
+	GLCall(glEnableVertexAttribArray(0));
 	
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexData.size() * sizeof(GLuint), m_IndexData.data(), GL_STATIC_DRAW);
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO));
+	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexData.size() * sizeof(GLuint), m_IndexData.data(), GL_STATIC_DRAW));
 }
 
 Application::~Application()
@@ -63,7 +63,7 @@ void Application::Run()
 		m_SceneManager.GetActiveScene()->Update();
 
 		m_Program->Bind();
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
 		m_Window->EndFrame();
 	}

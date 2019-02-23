@@ -180,6 +180,10 @@
     <ClInclude Include="src\Core\Util\Singleton.h" />
     <ClInclude Include="src\Core\Window\Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Shaders\BasicFS.shader" />
+    <None Include="res\Shaders\BasicVS.shader" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -28,4 +28,6 @@ void ShaderProgram::Link()
 		glGetProgramInfoLog(m_ID, 512, nullptr, log);
 		ASSERT(false, "Failed to link Shader Program\n" << log);
 	}
+
+	this->Bind();
 }

@@ -12,6 +12,8 @@
 #include "Core/Graphics/FragmentShader.h"
 #include "Core/Graphics/ShaderProgram.h"
 
+#include "Core/Graphics/Mesh.h"
+
 class Application : public Singleton
 {
 	static Application* s_Instance;
@@ -36,17 +38,17 @@ private:
 
 	std::unique_ptr<ShaderProgram> m_Program;
 
-	GLuint m_VBO, m_VAO, m_EBO;
+	std::unique_ptr<Mesh> m_QuadMesh;
 
-	std::array<GLfloat, 12> m_QuadData =
+	std::vector<Vertex> m_Vertices =
 	{
-		-0.5f,  0.5f, 0.0f, // TOP LEFT
-		 0.5f,  0.5f, 0.0f, // TOP RIGHT
-		 0.5f, -0.5f, 0.0f, // BOTTOM RIGHT
-		-0.5f, -0.5f, 0.0f  // BOTTOM LEFT
+		{ glm::vec3(-0.5,  0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) }, // TOP LEFT
+		{ glm::vec3( 0.5,  0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) }, // TOP RIGHT
+		{ glm::vec3( 0.5, -0.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) }, // BOTTOM RIGHT
+		{ glm::vec3(-0.5, -0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) }  // BOTTOM LEFT
 	};
 
-	std::array<GLuint, 6> m_IndexData =
+	std::vector<GLushort> m_Indices =
 	{
 		0, 1, 3,
 		1, 2, 3

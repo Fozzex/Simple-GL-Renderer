@@ -24,19 +24,7 @@ Application::Application(const std::string& title, int width, int height)
 
 	m_Program->Link();
 
-	GLCall(glGenVertexArrays(1, &m_VAO));
-	GLCall(glGenBuffers(1, &m_VBO));
-	GLCall(glGenBuffers(1, &m_EBO));
-
-	GLCall(glBindVertexArray(m_VAO));
-	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_VBO));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, m_QuadData.size() * sizeof(GLfloat), m_QuadData.data(), GL_STATIC_DRAW));
-	
-	GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0));
-	GLCall(glEnableVertexAttribArray(0));
-	
-	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO));
-	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexData.size() * sizeof(GLuint), m_IndexData.data(), GL_STATIC_DRAW));
+	m_QuadMesh = std::make_unique<Mesh>(m_Vertices, m_Indices);
 }
 
 Application::~Application()
@@ -63,7 +51,7 @@ void Application::Run()
 		m_SceneManager.GetActiveScene()->Update();
 
 		m_Program->Bind();
-		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+		m_QuadMesh->Draw();
 
 		m_Window->EndFrame();
 	}

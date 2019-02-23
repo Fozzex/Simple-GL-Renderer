@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -105,7 +105,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -121,7 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
     <ClCompile Include="src\Core\Graphics\FragmentShader.cpp" />
+    <ClCompile Include="src\Core\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
     <ClCompile Include="src\Core\Graphics\Shader.cpp" />
     <ClCompile Include="src\Core\Graphics\ShaderProgram.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Core\Graphics\FragmentShader.h" />
+    <ClInclude Include="src\Core\Graphics\Mesh.h" />
     <ClInclude Include="src\Core\Graphics\Scene.h" />
     <ClInclude Include="src\Core\Graphics\SceneManager.h" />
     <ClInclude Include="src\Core\Graphics\Shader.h" />

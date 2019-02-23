@@ -69,4 +69,6 @@ public:
 		WindowResizeEvent window;
 	};
 
+	bool handled = false;
+
 };

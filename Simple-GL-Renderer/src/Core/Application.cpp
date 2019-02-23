@@ -37,6 +37,11 @@ void Application::RegisterScene(Scene* scene)
 	m_SceneManager.Push(scene);
 }
 
+void Application::RegisterUIPanel(UIPanel* panel)
+{
+	m_UIRenderer.AddPanel(panel);
+}
+
 void Application::Run()
 {
 	while (!m_Window->Closed())
@@ -44,11 +49,13 @@ void Application::Run()
 		Event e;
 		while (m_Window->PollEvent(e))
 		{
-			m_SceneManager.GetActiveScene()->OnEvent(e);
+			if (!m_UIRenderer.PassEvent(e))
+				m_SceneManager.GetActiveScene()->OnEvent(e);
 		}
 
 		m_Window->StartFrame();
 		m_SceneManager.GetActiveScene()->Update();
+		m_UIRenderer.Update();
 
 		m_Program->Bind();
 		m_QuadMesh->Draw();

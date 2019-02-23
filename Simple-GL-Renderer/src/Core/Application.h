@@ -6,6 +6,7 @@
 #include "Util/Singleton.h"
 #include "Core/Window/Window.h"
 #include "Core/Graphics/SceneManager.h"
+#include "Core/Graphics/UIRenderer.h"
 #include "Core.h"
 
 #include "Core/Graphics/VertexShader.h"
@@ -23,6 +24,7 @@ public:
 	virtual ~Application();
 
 	void RegisterScene(Scene* scene);
+	void RegisterUIPanel(UIPanel* panel);
 
 	void Run();
 	static Application* Get() { return s_Instance; }
@@ -31,6 +33,9 @@ private:
 
 	std::unique_ptr<Window> m_Window;
 	SceneManager m_SceneManager;
+
+	// TODO: Make UIRenderer and it's panels accessible from scene
+	UIRenderer m_UIRenderer;
 
 	// TEMPORARY
 	std::unique_ptr<VertexShader>   m_VertexShader;

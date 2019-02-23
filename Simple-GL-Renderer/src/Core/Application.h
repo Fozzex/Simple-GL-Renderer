@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <GL/glew.h>
 
 #include "Util/Singleton.h"
 #include "Core/Window/Window.h"

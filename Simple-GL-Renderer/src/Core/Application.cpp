@@ -10,6 +10,9 @@ Application::Application(const std::string& title, int width, int height)
 	s_Instance = this;
 
 	m_Window = std::make_unique<Window>(title, width, height);
+
+	glewExperimental = GL_TRUE;
+	VERIFY(glewInit() == GLEW_OK, "Failed to initialize GLEW");
 }
 
 Application::~Application()

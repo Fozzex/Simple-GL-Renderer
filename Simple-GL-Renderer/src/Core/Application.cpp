@@ -10,6 +10,7 @@ Application::Application(const std::string& title, int width, int height)
 	s_Instance = this;
 
 	m_Window = std::make_unique<Window>(title, width, height);
+	m_Window->SetEventCallback(BIND_EVENT_CALLBACK(Application::OnEvent));
 
 	glewExperimental = GL_TRUE;
 	VERIFY(glewInit() == GLEW_OK, "Failed to initialize GLEW");
@@ -25,6 +26,8 @@ Application::Application(const std::string& title, int width, int height)
 	m_Program->Link();
 
 	m_QuadMesh = std::make_unique<Mesh>(m_Vertices, m_Indices);
+
+	this->RegisterUIPanel(new ImGuiPanel());
 }
 
 Application::~Application()
@@ -42,24 +45,23 @@ void Application::RegisterUIPanel(UIPanel* panel)
 	m_UIRenderer.AddPanel(panel);
 }
 
+void Application::OnEvent(Event& e)
+{
+	if (!m_UIRenderer.PassEvent(e))
+		m_SceneManager.GetActiveScene()->OnEvent(e);
+}
+
 void Application::Run()
 {
 	while (!m_Window->Closed())
 	{
-		Event e;
-		while (m_Window->PollEvent(e))
-		{
-			if (!m_UIRenderer.PassEvent(e))
-				m_SceneManager.GetActiveScene()->OnEvent(e);
-		}
-
 		m_Window->StartFrame();
-		m_SceneManager.GetActiveScene()->Update();
-		m_UIRenderer.Update();
-
 		m_Program->Bind();
+		m_SceneManager.GetActiveScene()->Update();
+
 		m_QuadMesh->Draw();
 
+		m_UIRenderer.Update();
 		m_Window->EndFrame();
 	}
 }

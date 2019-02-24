@@ -19,6 +19,7 @@ Window::Window(const std::string& title, int width, int height) :
 	}
 
 	glfwMakeContextCurrent(m_Window);
+	glfwSetWindowUserPointer(m_Window, &m_Callback);
 
 	glfwSetKeyCallback(m_Window, Window::KeyCallback);
 	glfwSetCharCallback(m_Window, Window::CharCallback);
@@ -47,17 +48,6 @@ void Window::EndFrame()
 	glfwPollEvents();
 }
 
-bool Window::PollEvent(Event& e)
-{
-	if (!EventQueue::Empty())
-	{
-		e = EventQueue::Next();
-		return true;
-	}
-
-	return false;
-}
-
 void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	Event e;
@@ -83,7 +73,8 @@ void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, 
 	e.key.alt = mods & GLFW_MOD_ALT;
 	e.key.option = mods & GLFW_MOD_SUPER;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::CharCallback(GLFWwindow* window, unsigned int codepoint)
@@ -92,7 +83,9 @@ void Window::CharCallback(GLFWwindow* window, unsigned int codepoint)
 	e.type = Event::Type::KeyTyped;
 
 	e.text.character = (char)codepoint;
-	EventQueue::Add(e);
+
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
@@ -103,7 +96,8 @@ void Window::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 	e.mouse.x = xpos;
 	e.mouse.y = ypos;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -126,7 +120,8 @@ void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int
 	e.button.alt    = mods & GLFW_MOD_ALT;
 	e.button.option = mods & GLFW_MOD_SUPER;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::MouseScrollCallback(GLFWwindow* window, double xoff, double yoff)
@@ -137,7 +132,8 @@ void Window::MouseScrollCallback(GLFWwindow* window, double xoff, double yoff)
 	e.scroll.x_offset = xoff;
 	e.scroll.y_offset = yoff;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::WindowResizeCallback(GLFWwindow* window, int width, int height)
@@ -148,7 +144,8 @@ void Window::WindowResizeCallback(GLFWwindow* window, int width, int height)
 	e.window.width = width;
 	e.window.height = height;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }
 
 void Window::WindowCloseCallback(GLFWwindow* window)
@@ -156,5 +153,6 @@ void Window::WindowCloseCallback(GLFWwindow* window)
 	Event e;
 	e.type = Event::Type::WindowClosed;
 
-	EventQueue::Add(e);
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	callback(e);
 }

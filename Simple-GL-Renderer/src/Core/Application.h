@@ -15,6 +15,8 @@
 
 #include "Core/Graphics/Mesh.h"
 
+#include "Core/Graphics/ImGui/ImGuiPanel.h"
+
 class Application : public Singleton
 {
 	static Application* s_Instance;
@@ -25,6 +27,8 @@ public:
 
 	void RegisterScene(Scene* scene);
 	void RegisterUIPanel(UIPanel* panel);
+	
+	void OnEvent(Event& e);
 
 	void Run();
 	static Application* Get() { return s_Instance; }
@@ -47,10 +51,10 @@ private:
 
 	std::vector<Vertex> m_Vertices =
 	{
-		{ glm::vec3(-0.5,  0.5f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) }, // TOP LEFT
-		{ glm::vec3( 0.5,  0.5f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) }, // TOP RIGHT
-		{ glm::vec3( 0.5, -0.5f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) }, // BOTTOM RIGHT
-		{ glm::vec3(-0.5, -0.5f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) }  // BOTTOM LEFT
+		{ glm::vec3(-1.0,  1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) }, // TOP LEFT
+		{ glm::vec3( 1.0,  1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) }, // TOP RIGHT
+		{ glm::vec3( 1.0, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) }, // BOTTOM RIGHT
+		{ glm::vec3(-1.0, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) }  // BOTTOM LEFT
 	};
 
 	std::vector<GLushort> m_Indices =

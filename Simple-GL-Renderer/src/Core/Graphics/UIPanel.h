@@ -9,5 +9,6 @@ public:
 	virtual bool OnEvent(Event& e) = 0;
 
 	virtual bool IsActive() = 0;
+	virtual void SetActive(bool active) = 0;
 
 };

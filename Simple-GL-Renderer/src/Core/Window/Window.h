@@ -4,15 +4,16 @@
 #include <string>
 #include <memory>
 #include <iostream>
+#include <functional>
 
 #include "Core/Core.h"
 #include "Core/Util/Singleton.h"
 #include "Core/Input/Event.h"
-#include "Core/Input/EventQueue.h"
 
 class Window : public Singleton
 {
 	static Window* s_WindowInstance;
+	using CallbackFn = std::function<void(Event&)>;
 public:
 
 	Window(const std::string& title, int width, int height);
@@ -21,10 +22,13 @@ public:
 	void StartFrame();
 	void EndFrame();
 
-	bool PollEvent(Event& e);
+	inline void SetEventCallback(const CallbackFn& callback) { m_Callback = callback; }
 
 	inline bool Closed() const { return glfwWindowShouldClose(m_Window); }
 	inline static Window* Get() { return s_WindowInstance; }
+
+	inline int GetWidth() const { return m_Width; }
+	inline int GetHeight() const { return m_Height; }
 
 	inline GLFWwindow* Raw() const { return m_Window; }
 
@@ -33,6 +37,7 @@ private:
 	GLFWwindow* m_Window;
 	std::string m_Title;
 	int m_Width, m_Height;
+	CallbackFn m_Callback;
 
 private:
 

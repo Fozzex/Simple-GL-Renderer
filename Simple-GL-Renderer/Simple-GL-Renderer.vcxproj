@@ -91,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;$(SolutionDir)Dependencies\ImGui\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,12 +105,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;$(SolutionDir)Dependencies\ImGui\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,14 +121,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;$(SolutionDir)Dependencies\ImGui\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,29 +139,30 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLFW_INCLUDE_NONE;GLEW_STATIC;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32\;$(SolutionDir)Dependencies\ImGui\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
-    <ClCompile Include="src\Core\Graphics\FragmentShader.cpp" />
-    <ClCompile Include="src\Core\Graphics\IndexBuffer.cpp" />
+    <ClCompile Include="src\Core\Graphics\ImGui\ImGuiPanel.cpp" />
+    <ClCompile Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\FragmentShader.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\IndexBuffer.cpp" />
     <ClCompile Include="src\Core\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
-    <ClCompile Include="src\Core\Graphics\Shader.cpp" />
-    <ClCompile Include="src\Core\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\Shader.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\ShaderProgram.cpp" />
     <ClCompile Include="src\Core\Graphics\UIRenderer.cpp" />
-    <ClCompile Include="src\Core\Graphics\VertexArray.cpp" />
-    <ClCompile Include="src\Core\Graphics\VertexBuffer.cpp" />
-    <ClCompile Include="src\Core\Graphics\VertexShader.cpp" />
-    <ClCompile Include="src\Core\Input\EventQueue.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\VertexArray.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\VertexBuffer.cpp" />
+    <ClCompile Include="src\Core\Graphics\OpenGL\VertexShader.cpp" />
     <ClCompile Include="src\Core\Input\Keyboard.cpp" />
     <ClCompile Include="src\Core\Input\Mouse.cpp" />
     <ClCompile Include="src\Core\Window\Window.cpp" />
@@ -170,20 +171,21 @@
   <ItemGroup>
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\Core.h" />
-    <ClInclude Include="src\Core\Graphics\FragmentShader.h" />
-    <ClInclude Include="src\Core\Graphics\IndexBuffer.h" />
+    <ClInclude Include="src\Core\Graphics\ImGui\ImGuiPanel.h" />
+    <ClInclude Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\FragmentShader.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\IndexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\Mesh.h" />
     <ClInclude Include="src\Core\Graphics\Scene.h" />
     <ClInclude Include="src\Core\Graphics\SceneManager.h" />
-    <ClInclude Include="src\Core\Graphics\Shader.h" />
-    <ClInclude Include="src\Core\Graphics\ShaderProgram.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\Shader.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\ShaderProgram.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />
     <ClInclude Include="src\Core\Graphics\UIRenderer.h" />
-    <ClInclude Include="src\Core\Graphics\VertexArray.h" />
-    <ClInclude Include="src\Core\Graphics\VertexBuffer.h" />
-    <ClInclude Include="src\Core\Graphics\VertexShader.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\VertexArray.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\VertexBuffer.h" />
+    <ClInclude Include="src\Core\Graphics\OpenGL\VertexShader.h" />
     <ClInclude Include="src\Core\Input\Event.h" />
-    <ClInclude Include="src\Core\Input\EventQueue.h" />
     <ClInclude Include="src\Core\Input\Keyboard.h" />
     <ClInclude Include="src\Core\Input\Mouse.h" />
     <ClInclude Include="src\Core\Util\NonCopyable.h" />

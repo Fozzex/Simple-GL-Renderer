@@ -7,39 +7,6 @@
 #include "Core/Graphics/Scene.h"
 #include "Core/Graphics/UIPanel.h"
 
-class MyGUI : public UIPanel
-{
-public:
-
-	MyGUI() {}
-	~MyGUI() {}
-
-	void Update() override
-	{
-
-	}
-
-	bool OnEvent(Event& e) override
-	{
-		if (e.type == Event::Type::MouseButtonPressed)
-		{
-			if (e.button.button == Mouse::Button::Left)
-			{
-				std::cout << "[GUI] Left Mouse Button Pressed!" << std::endl;
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	bool IsActive() override
-	{
-		return true;
-	}
-
-};
-
 class TestScene : public Scene
 {
 public:
@@ -78,7 +45,6 @@ public:
 	{
 		std::cout << "Sandbox Constructed" << std::endl;
 		this->RegisterScene(new TestScene());
-		this->RegisterUIPanel(new MyGUI());
 	}
 
 	~Sandbox()

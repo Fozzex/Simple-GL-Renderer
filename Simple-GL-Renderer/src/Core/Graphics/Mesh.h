@@ -27,7 +27,4 @@ private:
 	VertexBuffer m_VertexBuffer;
 	IndexBuffer m_IndexBuffer;
 
-	std::vector<Vertex> m_Vertices;
-	std::vector<GLushort> m_Indices;
-
 };

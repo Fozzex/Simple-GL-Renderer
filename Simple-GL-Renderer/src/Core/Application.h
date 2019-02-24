@@ -9,9 +9,9 @@
 #include "Core/Graphics/UIRenderer.h"
 #include "Core.h"
 
-#include "Core/Graphics/VertexShader.h"
-#include "Core/Graphics/FragmentShader.h"
-#include "Core/Graphics/ShaderProgram.h"
+#include "Core/Graphics/OpenGL/VertexShader.h"
+#include "Core/Graphics/OpenGL/FragmentShader.h"
+#include "Core/Graphics/OpenGL/ShaderProgram.h"
 
 #include "Core/Graphics/Mesh.h"
 

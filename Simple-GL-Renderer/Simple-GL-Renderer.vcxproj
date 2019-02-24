@@ -152,11 +152,14 @@
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
     <ClCompile Include="src\Core\Graphics\FragmentShader.cpp" />
+    <ClCompile Include="src\Core\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="src\Core\Graphics\Mesh.cpp" />
     <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
     <ClCompile Include="src\Core\Graphics\Shader.cpp" />
     <ClCompile Include="src\Core\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="src\Core\Graphics\UIRenderer.cpp" />
+    <ClCompile Include="src\Core\Graphics\VertexArray.cpp" />
+    <ClCompile Include="src\Core\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="src\Core\Graphics\VertexShader.cpp" />
     <ClCompile Include="src\Core\Input\EventQueue.cpp" />
     <ClCompile Include="src\Core\Input\Keyboard.cpp" />
@@ -168,6 +171,7 @@
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Core\Graphics\FragmentShader.h" />
+    <ClInclude Include="src\Core\Graphics\IndexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\Mesh.h" />
     <ClInclude Include="src\Core\Graphics\Scene.h" />
     <ClInclude Include="src\Core\Graphics\SceneManager.h" />
@@ -175,6 +179,8 @@
     <ClInclude Include="src\Core\Graphics\ShaderProgram.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />
     <ClInclude Include="src\Core\Graphics\UIRenderer.h" />
+    <ClInclude Include="src\Core\Graphics\VertexArray.h" />
+    <ClInclude Include="src\Core\Graphics\VertexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\VertexShader.h" />
     <ClInclude Include="src\Core\Input\Event.h" />
     <ClInclude Include="src\Core\Input\EventQueue.h" />

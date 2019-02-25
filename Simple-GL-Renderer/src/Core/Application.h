@@ -41,25 +41,9 @@ private:
 	// TODO: Make UIRenderer and it's panels accessible from scene
 	UIRenderer m_UIRenderer;
 
-	// TEMPORARY
 	std::unique_ptr<VertexShader>   m_VertexShader;
 	std::unique_ptr<FragmentShader> m_FragmentShader;
 
 	std::unique_ptr<ShaderProgram> m_Program;
 
-	std::unique_ptr<Mesh> m_QuadMesh;
-
-	std::vector<Vertex> m_Vertices =
-	{
-		{ glm::vec3(-1.0,  1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f) }, // TOP LEFT
-		{ glm::vec3( 1.0,  1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f) }, // TOP RIGHT
-		{ glm::vec3( 1.0, -1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f) }, // BOTTOM RIGHT
-		{ glm::vec3(-1.0, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) }  // BOTTOM LEFT
-	};
-
-	std::vector<GLushort> m_Indices =
-	{
-		0, 1, 3,
-		1, 2, 3
-	};
 };

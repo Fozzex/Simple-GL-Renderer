@@ -12,27 +12,27 @@ ImGuiPanel::ImGuiPanel()
 	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;          // We can honor io.WantSetMousePos requests (optional, rarely used)
 
 	// Keyboard mapping. ImGui will use those indices to peek into the io.KeysDown[] array.
-	io.KeyMap[ImGuiKey_Tab] = Keyboard::Tab;
-	io.KeyMap[ImGuiKey_LeftArrow] = Keyboard::Left;
-	io.KeyMap[ImGuiKey_RightArrow] = Keyboard::Right;
-	io.KeyMap[ImGuiKey_UpArrow] = Keyboard::Up;
-	io.KeyMap[ImGuiKey_DownArrow] = Keyboard::Down;
-	io.KeyMap[ImGuiKey_PageUp] = Keyboard::PageUp;
-	io.KeyMap[ImGuiKey_PageDown] = Keyboard::PageDown;
-	io.KeyMap[ImGuiKey_Home] = Keyboard::Home;
-	io.KeyMap[ImGuiKey_End] = Keyboard::End;
-	io.KeyMap[ImGuiKey_Insert] = Keyboard::Insert;
-	io.KeyMap[ImGuiKey_Delete] = Keyboard::Delete;
-	io.KeyMap[ImGuiKey_Backspace] = Keyboard::BackSpace;
-	io.KeyMap[ImGuiKey_Space] = Keyboard::Space;
-	io.KeyMap[ImGuiKey_Enter] = Keyboard::Enter;
-	io.KeyMap[ImGuiKey_Escape] = Keyboard::Escape;
-	io.KeyMap[ImGuiKey_A] = Keyboard::A;
-	io.KeyMap[ImGuiKey_C] = Keyboard::C;
-	io.KeyMap[ImGuiKey_V] = Keyboard::V;
-	io.KeyMap[ImGuiKey_X] = Keyboard::X;
-	io.KeyMap[ImGuiKey_Y] = Keyboard::Y;
-	io.KeyMap[ImGuiKey_Z] = Keyboard::Z;
+	io.KeyMap[ImGuiKey_Tab]		    = Keyboard::Tab;
+	io.KeyMap[ImGuiKey_LeftArrow]   = Keyboard::Left;
+	io.KeyMap[ImGuiKey_RightArrow]  = Keyboard::Right;
+	io.KeyMap[ImGuiKey_UpArrow]	    = Keyboard::Up;
+	io.KeyMap[ImGuiKey_DownArrow]   = Keyboard::Down;
+	io.KeyMap[ImGuiKey_PageUp]	    = Keyboard::PageUp;
+	io.KeyMap[ImGuiKey_PageDown]    = Keyboard::PageDown;
+	io.KeyMap[ImGuiKey_Home]	    = Keyboard::Home;
+	io.KeyMap[ImGuiKey_End]		    = Keyboard::End;
+	io.KeyMap[ImGuiKey_Insert]	    = Keyboard::Insert;
+	io.KeyMap[ImGuiKey_Delete]	    = Keyboard::Delete;
+	io.KeyMap[ImGuiKey_Backspace]   = Keyboard::BackSpace;
+	io.KeyMap[ImGuiKey_Space]	    = Keyboard::Space;
+	io.KeyMap[ImGuiKey_Enter]	    = Keyboard::Enter;
+	io.KeyMap[ImGuiKey_Escape]	    = Keyboard::Escape;
+	io.KeyMap[ImGuiKey_A]		    = Keyboard::A;
+	io.KeyMap[ImGuiKey_C]		    = Keyboard::C;
+	io.KeyMap[ImGuiKey_V]		    = Keyboard::V;
+	io.KeyMap[ImGuiKey_X]		    = Keyboard::X;
+	io.KeyMap[ImGuiKey_Y]		    = Keyboard::Y;
+	io.KeyMap[ImGuiKey_Z]		    = Keyboard::Z;
 }
 
 void ImGuiPanel::Update()
@@ -47,7 +47,9 @@ void ImGuiPanel::Update()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::ShowDemoWindow(&m_ShowDemoWindow);
+	ImGui::Begin("Render Engine GUI", &m_ShowMainWindow);
+
+	ImGui::End();
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -59,28 +61,49 @@ bool ImGuiPanel::OnEvent(Event& e)
 	switch (e.type)
 	{
 	case Event::Type::KeyPressed:
-		io.KeysDown[e.key.key_code] = true;
+		if (io.WantCaptureKeyboard)
+		{
+			io.KeysDown[e.key.key_code] = true;
 
-		io.KeyCtrl = e.key.ctrl;
-		io.KeyShift = e.key.shift;
-		io.KeyAlt = e.key.alt;
-		io.KeySuper = e.key.option;
+			io.KeyCtrl = e.key.ctrl;
+			io.KeyShift = e.key.shift;
+			io.KeyAlt = e.key.alt;
+			io.KeySuper = e.key.option;
+
+			return true;
+		}
 		break;
 
 	case Event::Type::KeyReleased:
-		io.KeysDown[e.key.key_code] = false;
+		if (io.WantCaptureKeyboard)
+		{
+			io.KeysDown[e.key.key_code] = false;
+			return true;
+		}
 		break;
 
 	case Event::Type::KeyTyped:
-		io.AddInputCharacter(e.text.character);
+		if (io.WantTextInput)
+		{
+			io.AddInputCharacter(e.text.character);
+			return true;
+		}
 		break;
 
 	case Event::Type::MouseButtonPressed:
-		io.MouseDown[e.button.button] = true;
+		if (io.WantCaptureMouse)
+		{
+			io.MouseDown[e.button.button] = true;
+			return true;
+		}
 		break;
 
 	case Event::Type::MouseButtonReleased:
-		io.MouseDown[e.button.button] = false;
+		if (io.WantCaptureMouse)
+		{
+			io.MouseDown[e.button.button] = false;
+			return true;
+		}
 		break;
 
 	case Event::Type::MouseMoved:
@@ -88,8 +111,12 @@ bool ImGuiPanel::OnEvent(Event& e)
 		break;
 
 	case Event::Type::MouseScrolled:
-		io.MouseWheel += (float)e.scroll.y_offset;
-		io.MouseWheelH += (float)e.scroll.x_offset;
+		if (io.WantCaptureMouse)
+		{
+			io.MouseWheel += (float)e.scroll.y_offset;
+			io.MouseWheelH += (float)e.scroll.x_offset;
+			return true;
+		}
 		break;
 
 	case Event::Type::WindowResized:
@@ -103,5 +130,5 @@ bool ImGuiPanel::OnEvent(Event& e)
 
 bool ImGuiPanel::IsActive()
 {
-	return m_ShowDemoWindow;
+	return m_ShowMainWindow;
 }

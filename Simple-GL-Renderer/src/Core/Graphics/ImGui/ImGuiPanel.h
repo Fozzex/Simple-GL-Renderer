@@ -17,12 +17,14 @@ public:
 	bool OnEvent(Event& e) override;
 
 	bool IsActive() override;
-	inline void SetActive(bool active) override { m_ShowDemoWindow = active; }
+	inline void SetActive(bool active) override { m_ShowMainWindow = active; }
 
 private:
 
 	float m_LastFrameTime = 0.0f;
 
-	bool m_ShowDemoWindow = true;
+	bool m_ShowMainWindow = true;
+	bool m_ShowSecondWindow = false;
+	float m_SliderFloat = 0.0f;
 
 };

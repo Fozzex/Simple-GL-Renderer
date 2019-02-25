@@ -25,8 +25,6 @@ Application::Application(const std::string& title, int width, int height)
 
 	m_Program->Link();
 
-	m_QuadMesh = std::make_unique<Mesh>(m_Vertices, m_Indices);
-
 	this->RegisterUIPanel(new ImGuiPanel());
 }
 
@@ -57,9 +55,8 @@ void Application::Run()
 	{
 		m_Window->StartFrame();
 		m_Program->Bind();
-		m_SceneManager.GetActiveScene()->Update();
 
-		m_QuadMesh->Draw();
+		m_SceneManager.GetActiveScene()->Update();
 
 		m_UIRenderer.Update();
 		m_Window->EndFrame();

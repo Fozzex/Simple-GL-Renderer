@@ -31,3 +31,13 @@ void ShaderProgram::Link()
 
 	this->Bind();
 }
+
+GLint ShaderProgram::GetUniformLocation(const std::string& name) const
+{
+	return glGetUniformLocation(m_ID, name.c_str());
+}
+
+void ShaderProgram::SetMat4(const std::string& name, const glm::mat4& value) const
+{
+	GLCall(glUniformMatrix4fv(this->GetUniformLocation(name), 1, false, glm::value_ptr(value)));
+}

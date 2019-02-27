@@ -1,6 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
 #include "OpenGL/ShaderProgram.h"
@@ -20,27 +21,29 @@ public:
 
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<GLushort>& indices);
 	~Mesh();
-	
-	static void LayoutElements(const VertexBuffer* buffer);
 
-	inline const std::vector<Vertex>* GetVertices() const { return &m_Vertices; }
-	inline const std::vector<GLushort>* GetIndices() const { return &m_Indices; }
+	void UpdateModelMatrix();
+	void Draw();
 
-	inline void SetVertexBuffer(VertexBuffer* buffer) { m_VertexBuffer = buffer; }
-	inline VertexBuffer* GetVertexBuffer() const { return m_VertexBuffer; }
+	inline void ResetModelMatrix() { m_ModelMatrix = glm::mat4(1); }
+	inline glm::mat4 GetModelMatrix() const { return m_ModelMatrix; }
 
-	inline void SetIndexBuffer(IndexBuffer* buffer) { m_IndexBuffer = buffer; }
-	inline IndexBuffer* GetIndexBuffer() const { return m_IndexBuffer; }
+	inline void SetPosition(const glm::vec3& position) { m_Position = position; }
+	inline glm::vec3 GetPosition() const { return m_Position; }
 
-	inline const VertexArray* GetVertexArray() const { return &m_VertexArray; }
+	inline void Move(const glm::vec3& offset) { m_Position = m_Position + offset; }
 
 private:
 
-	const std::vector<Vertex>& m_Vertices;
-	const std::vector<GLushort>& m_Indices;
+	std::vector<Vertex> m_Vertices;
+	std::vector<GLushort> m_Indices;
 
-	VertexBuffer* m_VertexBuffer;
-	IndexBuffer* m_IndexBuffer;
+	VertexBuffer m_VertexBuffer;
 	VertexArray m_VertexArray;
+	IndexBuffer m_IndexBuffer;
+
+	glm::vec3 m_Position;
+
+	glm::mat4 m_ModelMatrix;
 
 };

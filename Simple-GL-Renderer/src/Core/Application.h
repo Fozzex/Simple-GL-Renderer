@@ -30,6 +30,8 @@ public:
 	
 	void OnEvent(Event& e);
 
+	inline ShaderProgram* GetProgram() const { return m_Program.get(); }
+
 	void Run();
 	static Application* Get() { return s_Instance; }
 
@@ -38,7 +40,6 @@ private:
 	std::unique_ptr<Window> m_Window;
 	SceneManager m_SceneManager;
 
-	// TODO: Make UIRenderer and it's panels accessible from scene
 	UIRenderer m_UIRenderer;
 
 	std::unique_ptr<VertexShader>   m_VertexShader;

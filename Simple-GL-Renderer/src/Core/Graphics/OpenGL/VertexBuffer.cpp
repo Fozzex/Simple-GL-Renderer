@@ -11,7 +11,7 @@ VertexBuffer::~VertexBuffer()
 	GLCall(glDeleteBuffers(1, &m_ID));
 }
 
-void VertexBuffer::BufferData(GLsizei bytes, const void* data, GLenum drawUsage)
+void VertexBuffer::BufferData(GLsizei bytes, const void* data, GLenum drawUsage) const
 {
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_ID));
 	GLCall(glBufferData(GL_ARRAY_BUFFER, bytes, data, drawUsage));

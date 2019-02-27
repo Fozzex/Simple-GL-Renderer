@@ -7,7 +7,8 @@
 #include "Core/Graphics/Scene.h"
 #include "Core/Graphics/UIPanel.h"
 #include "Core/Graphics/Mesh.h"
-#include "Core/Graphics/SimpleMeshRenderer.h"
+#include "Core/Graphics/BasicMeshRenderer.h"
+#include "Core/Graphics/Templates/QuadMesh.h"
 
 class TestScene : public Scene
 {
@@ -16,8 +17,8 @@ public:
 	TestScene() 
 	{
 		std::cout << "TestScene Registered" << std::endl;
-		m_Renderer = std::make_unique<SimpleMeshRenderer>();
-		m_QuadMesh = std::make_unique<Mesh>(m_QuadVertices, m_QuadIndices);
+		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram());
+		m_QuadMesh = std::make_unique<QuadMesh>(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
 	}
 
 	~TestScene()
@@ -36,29 +37,22 @@ public:
 	{
 		switch (e.type)
 		{
-		case Event::Type::MouseButtonPressed:
-			std::cout << "[TestScene]: Mouse Pressed" << std::endl;
+		case Event::Type::KeyPressed:
+			if (e.key.key_code == Keyboard::A)
+				m_QuadMesh->Move(glm::vec3(-0.001f, 0.0f, 0.0f));
+			if (e.key.key_code == Keyboard::D)
+				m_QuadMesh->Move(glm::vec3(0.001f, 0.0f, 0.0f));
+			if (e.key.key_code == Keyboard::W)
+				m_QuadMesh->Move(glm::vec3(0.0f, 0.001f, 0.0f));
+			if (e.key.key_code == Keyboard::S)
+				m_QuadMesh->Move(glm::vec3(0.0f, -0.001f, 0.0f));
 		}
 	}
 
 private:
 
-	std::vector<Vertex> m_QuadVertices
-	{
-		{ glm::vec3(-0.5f,  0.5f, 0.0), glm::vec3(0.2f, 0.2f, 0.2f) },
-		{ glm::vec3( 0.5f,  0.5f, 0.0), glm::vec3(0.2f, 0.2f, 0.2f) },
-		{ glm::vec3( 0.5f, -0.5f, 0.0), glm::vec3(0.2f, 0.2f, 0.2f) },
-		{ glm::vec3(-0.5f, -0.5f, 0.0), glm::vec3(0.2f, 0.2f, 0.2f) }
-	};
-
-	std::vector<GLushort> m_QuadIndices
-	{
-		0, 1, 3,
-		1, 2, 3
-	};
-
-	std::unique_ptr<SimpleMeshRenderer> m_Renderer;
-	std::unique_ptr<Mesh> m_QuadMesh;
+	std::unique_ptr<BasicMeshRenderer> m_Renderer;
+	std::unique_ptr<QuadMesh> m_QuadMesh;
 
 };
 

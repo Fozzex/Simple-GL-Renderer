@@ -13,7 +13,7 @@ VertexArray::~VertexArray()
 void VertexArray::DrawElements(GLuint count) const
 {
 	this->Bind();
-	GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, nullptr));
+	GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, 0));
 }
 
 void VertexArray::Bind() const

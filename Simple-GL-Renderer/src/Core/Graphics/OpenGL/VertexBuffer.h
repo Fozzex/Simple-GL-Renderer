@@ -8,7 +8,7 @@ public:
 	VertexBuffer();
 	~VertexBuffer();
 
-	void BufferData(GLsizei bytes, const void* data, GLenum drawUsage);
+	void BufferData(GLsizei bytes, const void* data, GLenum drawUsage) const;
 	void SetElementLayout(GLuint location, GLuint elements, GLsizei byteStride, GLsizei byteOffset) const;
 
 	void Bind() const;

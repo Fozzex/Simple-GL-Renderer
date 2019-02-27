@@ -11,13 +11,13 @@ VertexBuffer::~VertexBuffer()
 	GLCall(glDeleteBuffers(1, &m_ID));
 }
 
-void VertexBuffer::BufferData(GLsizei bytes, const void* data)
+void VertexBuffer::BufferData(GLsizei bytes, const void* data, GLenum drawUsage)
 {
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_ID));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, bytes, data, GL_STATIC_DRAW));
+	GLCall(glBufferData(GL_ARRAY_BUFFER, bytes, data, drawUsage));
 }
 
-void VertexBuffer::SetElementLayout(GLuint location, GLuint elements, GLsizei byteStride, GLsizei byteOffset)
+void VertexBuffer::SetElementLayout(GLuint location, GLuint elements, GLsizei byteStride, GLsizei byteOffset) const
 {
 	this->Bind();
 	GLCall(glVertexAttribPointer(location, elements, GL_FLOAT, GL_FALSE, byteStride, (void*)byteOffset));

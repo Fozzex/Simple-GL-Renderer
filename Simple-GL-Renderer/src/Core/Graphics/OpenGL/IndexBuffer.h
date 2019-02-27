@@ -9,7 +9,7 @@ public:
 	IndexBuffer();
 	~IndexBuffer();
 
-	void BufferData(GLsizei bytes, GLuint count, const void* data);
+	void BufferData(GLsizei bytes, GLuint count, const void* data, GLenum drawUsage);
 
 	void Bind() const;
 	void Unbind() const;

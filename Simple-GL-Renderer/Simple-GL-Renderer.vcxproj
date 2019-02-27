@@ -159,7 +159,7 @@
     <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\ShaderProgram.cpp" />
-    <ClCompile Include="src\Core\Graphics\SimpleRenderer.cpp" />
+    <ClCompile Include="src\Core\Graphics\SimpleMeshRenderer.cpp" />
     <ClCompile Include="src\Core\Graphics\UIRenderer.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexBuffer.cpp" />
@@ -174,6 +174,7 @@
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Core\Graphics\ImGui\ImGuiPanel.h" />
     <ClInclude Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Core\Graphics\MeshRenderer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\FragmentShader.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\IndexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\Mesh.h" />
@@ -181,7 +182,7 @@
     <ClInclude Include="src\Core\Graphics\SceneManager.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\Shader.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\ShaderProgram.h" />
-    <ClInclude Include="src\Core\Graphics\SimpleRenderer.h" />
+    <ClInclude Include="src\Core\Graphics\SimpleMeshRenderer.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />
     <ClInclude Include="src\Core\Graphics\UIRenderer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexArray.h" />

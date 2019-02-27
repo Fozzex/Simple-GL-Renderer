@@ -10,7 +10,7 @@ VertexArray::~VertexArray()
 	GLCall(glDeleteVertexArrays(1, &m_ID));
 }
 
-void VertexArray::DrawElements(GLuint count)
+void VertexArray::DrawElements(GLuint count) const
 {
 	this->Bind();
 	GLCall(glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, nullptr));

@@ -66,7 +66,7 @@
     <ClCompile Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Graphics\SimpleRenderer.cpp">
+    <ClCompile Include="src\Core\Graphics\SimpleMeshRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,7 +140,10 @@
     <ClInclude Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Graphics\SimpleRenderer.h">
+    <ClInclude Include="src\Core\Graphics\MeshRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Graphics\SimpleMeshRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

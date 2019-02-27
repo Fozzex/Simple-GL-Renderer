@@ -7,7 +7,7 @@
 #include "Core/Graphics/Scene.h"
 #include "Core/Graphics/UIPanel.h"
 #include "Core/Graphics/Mesh.h"
-#include "Core/Graphics/SimpleRenderer.h"
+#include "Core/Graphics/SimpleMeshRenderer.h"
 
 class TestScene : public Scene
 {
@@ -16,6 +16,7 @@ public:
 	TestScene() 
 	{
 		std::cout << "TestScene Registered" << std::endl;
+		m_Renderer = std::make_unique<SimpleMeshRenderer>();
 		m_QuadMesh = std::make_unique<Mesh>(m_QuadVertices, m_QuadIndices);
 	}
 
@@ -26,9 +27,9 @@ public:
 
 	void Update() override
 	{
-		m_Renderer.Submit(m_QuadMesh.get());
+		m_Renderer->Submit(m_QuadMesh.get());
 
-		m_Renderer.Flush();
+		m_Renderer->Flush();
 	}
 
 	void OnEvent(Event& e) override
@@ -56,7 +57,7 @@ private:
 		1, 2, 3
 	};
 
-	SimpleRenderer m_Renderer;
+	std::unique_ptr<SimpleMeshRenderer> m_Renderer;
 	std::unique_ptr<Mesh> m_QuadMesh;
 
 };

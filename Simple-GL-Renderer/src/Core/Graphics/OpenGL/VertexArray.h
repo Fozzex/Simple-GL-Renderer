@@ -12,7 +12,7 @@ public:
 	VertexArray();
 	~VertexArray();
 
-	void DrawElements(GLuint count);
+	void DrawElements(GLuint count) const;
 
 	void Bind() const;
 	void Unbind() const;

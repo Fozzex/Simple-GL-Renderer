@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
     <ClCompile Include="src\Core\Graphics\BasicMeshRenderer.cpp" />
+    <ClCompile Include="src\Core\Graphics\Camera.cpp" />
     <ClCompile Include="src\Core\Graphics\ImGui\ImGuiPanel.cpp" />
     <ClCompile Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\FragmentShader.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\Core.h" />
     <ClInclude Include="src\Core\Graphics\BasicMeshRenderer.h" />
+    <ClInclude Include="src\Core\Graphics\Camera.h" />
     <ClInclude Include="src\Core\Graphics\ImGui\ImGuiPanel.h" />
     <ClInclude Include="src\Core\Graphics\ImGui\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Core\Graphics\MeshRenderer.h" />

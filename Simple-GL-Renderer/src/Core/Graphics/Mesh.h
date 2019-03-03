@@ -31,6 +31,8 @@ public:
 	inline void SetPosition(const glm::vec3& position) { m_Position = position; }
 	inline glm::vec3 GetPosition() const { return m_Position; }
 
+	void SetRotation(float angle, const glm::vec3& direction);
+
 	inline void Move(const glm::vec3& offset) { m_Position = m_Position + offset; }
 
 private:
@@ -43,6 +45,7 @@ private:
 	IndexBuffer m_IndexBuffer;
 
 	glm::vec3 m_Position;
+	glm::mat4 m_Rotation;
 
 	glm::mat4 m_ModelMatrix;
 

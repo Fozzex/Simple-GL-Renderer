@@ -20,6 +20,7 @@ Window::Window(const std::string& title, int width, int height) :
 
 	glfwMakeContextCurrent(m_Window);
 	glfwSetWindowUserPointer(m_Window, &m_Callback);
+	glViewport(0, 0, m_Width, m_Height);
 
 	glfwSetKeyCallback(m_Window, Window::KeyCallback);
 	glfwSetCharCallback(m_Window, Window::CharCallback);
@@ -38,8 +39,8 @@ Window::~Window()
 
 void Window::StartFrame()
 {
-	glClearColor(0.4f, 0.7f, 0.6f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::EndFrame()

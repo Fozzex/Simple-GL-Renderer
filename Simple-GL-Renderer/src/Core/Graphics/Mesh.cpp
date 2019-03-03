@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
 Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLushort>& indices) :
-	m_Vertices(vertices), m_Indices(indices), m_ModelMatrix(1)
+	m_Vertices(vertices), m_Indices(indices), m_ModelMatrix(1), m_Rotation(1)
 {
 	m_VertexArray.Bind();
 	m_VertexBuffer.Bind();
@@ -25,7 +25,17 @@ void Mesh::Draw()
 	m_VertexArray.DrawElements(m_IndexBuffer.GetCount());
 }
 
+void Mesh::SetRotation(float angle, const glm::vec3& direction)
+{
+	m_Rotation = glm::rotate(glm::mat4(1), glm::radians(angle), direction);
+}
+
 void Mesh::UpdateModelMatrix()
 {
-	m_ModelMatrix = glm::translate(glm::mat4(1), m_Position);
+	glm::mat4 translation = glm::mat4(1);
+	translation = glm::translate(translation, m_Position);
+
+	m_ModelMatrix = translation * m_Rotation;
+	
+	m_Rotation = glm::mat4(1);
 }

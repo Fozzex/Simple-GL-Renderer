@@ -30,6 +30,8 @@ public:
 	inline int GetWidth() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
 
+	inline float GetAspectRatio() const { return m_Width / (float)m_Height; }
+
 	inline GLFWwindow* Raw() const { return m_Window; }
 
 private:

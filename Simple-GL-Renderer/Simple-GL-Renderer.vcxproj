@@ -168,6 +168,7 @@
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexShader.cpp" />
     <ClCompile Include="src\Core\Input\Keyboard.cpp" />
     <ClCompile Include="src\Core\Input\Mouse.cpp" />
+    <ClCompile Include="src\Core\Util\Timer.cpp" />
     <ClCompile Include="src\Core\Window\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <ClInclude Include="src\Core\Util\NonCopyable.h" />
     <ClInclude Include="src\Core\Util\NonMovable.h" />
     <ClInclude Include="src\Core\Util\Singleton.h" />
+    <ClInclude Include="src\Core\Util\Timer.h" />
     <ClInclude Include="src\Core\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>

@@ -4,12 +4,16 @@
 class Mouse
 {
 public:
+	enum class Button;
 
-	static bool ButtonPressed(int button);
+	static bool ButtonPressed(Button button);
 
 	static void GetPosition(double &x, double &y);
+	static void SetPosition(double x, double y);
 
-	enum Button
+	static void SetCursorHidden(bool hidden);
+
+	enum class Button
 	{
 		Left	= GLFW_MOUSE_BUTTON_1,
 		Right	= GLFW_MOUSE_BUTTON_2,

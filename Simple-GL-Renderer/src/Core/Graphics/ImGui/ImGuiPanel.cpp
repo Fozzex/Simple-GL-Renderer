@@ -12,27 +12,27 @@ ImGuiPanel::ImGuiPanel()
 	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;          // We can honor io.WantSetMousePos requests (optional, rarely used)
 
 	// Keyboard mapping. ImGui will use those indices to peek into the io.KeysDown[] array.
-	io.KeyMap[ImGuiKey_Tab]		    = Keyboard::Tab;
-	io.KeyMap[ImGuiKey_LeftArrow]   = Keyboard::Left;
-	io.KeyMap[ImGuiKey_RightArrow]  = Keyboard::Right;
-	io.KeyMap[ImGuiKey_UpArrow]	    = Keyboard::Up;
-	io.KeyMap[ImGuiKey_DownArrow]   = Keyboard::Down;
-	io.KeyMap[ImGuiKey_PageUp]	    = Keyboard::PageUp;
-	io.KeyMap[ImGuiKey_PageDown]    = Keyboard::PageDown;
-	io.KeyMap[ImGuiKey_Home]	    = Keyboard::Home;
-	io.KeyMap[ImGuiKey_End]		    = Keyboard::End;
-	io.KeyMap[ImGuiKey_Insert]	    = Keyboard::Insert;
-	io.KeyMap[ImGuiKey_Delete]	    = Keyboard::Delete;
-	io.KeyMap[ImGuiKey_Backspace]   = Keyboard::BackSpace;
-	io.KeyMap[ImGuiKey_Space]	    = Keyboard::Space;
-	io.KeyMap[ImGuiKey_Enter]	    = Keyboard::Enter;
-	io.KeyMap[ImGuiKey_Escape]	    = Keyboard::Escape;
-	io.KeyMap[ImGuiKey_A]		    = Keyboard::A;
-	io.KeyMap[ImGuiKey_C]		    = Keyboard::C;
-	io.KeyMap[ImGuiKey_V]		    = Keyboard::V;
-	io.KeyMap[ImGuiKey_X]		    = Keyboard::X;
-	io.KeyMap[ImGuiKey_Y]		    = Keyboard::Y;
-	io.KeyMap[ImGuiKey_Z]		    = Keyboard::Z;
+	io.KeyMap[ImGuiKey_Tab]		    = static_cast<int>(Keyboard::KeyCode::Tab);
+	io.KeyMap[ImGuiKey_LeftArrow]   = static_cast<int>(Keyboard::KeyCode::Left);
+	io.KeyMap[ImGuiKey_RightArrow]  = static_cast<int>(Keyboard::KeyCode::Right);
+	io.KeyMap[ImGuiKey_UpArrow]	    = static_cast<int>(Keyboard::KeyCode::Up);
+	io.KeyMap[ImGuiKey_DownArrow]   = static_cast<int>(Keyboard::KeyCode::Down);
+	io.KeyMap[ImGuiKey_PageUp]	    = static_cast<int>(Keyboard::KeyCode::PageUp);
+	io.KeyMap[ImGuiKey_PageDown]    = static_cast<int>(Keyboard::KeyCode::PageDown);
+	io.KeyMap[ImGuiKey_Home]	    = static_cast<int>(Keyboard::KeyCode::Home);
+	io.KeyMap[ImGuiKey_End]		    = static_cast<int>(Keyboard::KeyCode::End);
+	io.KeyMap[ImGuiKey_Insert]	    = static_cast<int>(Keyboard::KeyCode::Insert);
+	io.KeyMap[ImGuiKey_Delete]	    = static_cast<int>(Keyboard::KeyCode::Delete);
+	io.KeyMap[ImGuiKey_Backspace]   = static_cast<int>(Keyboard::KeyCode::BackSpace);
+	io.KeyMap[ImGuiKey_Space]	    = static_cast<int>(Keyboard::KeyCode::Space);
+	io.KeyMap[ImGuiKey_Enter]	    = static_cast<int>(Keyboard::KeyCode::Enter);
+	io.KeyMap[ImGuiKey_Escape]	    = static_cast<int>(Keyboard::KeyCode::Escape);
+	io.KeyMap[ImGuiKey_A]		    = static_cast<int>(Keyboard::KeyCode::A);
+	io.KeyMap[ImGuiKey_C]		    = static_cast<int>(Keyboard::KeyCode::C);
+	io.KeyMap[ImGuiKey_V]		    = static_cast<int>(Keyboard::KeyCode::V);
+	io.KeyMap[ImGuiKey_X]		    = static_cast<int>(Keyboard::KeyCode::X);
+	io.KeyMap[ImGuiKey_Y]		    = static_cast<int>(Keyboard::KeyCode::Y);
+	io.KeyMap[ImGuiKey_Z]		    = static_cast<int>(Keyboard::KeyCode::Z);
 }
 
 void ImGuiPanel::Update()
@@ -63,7 +63,7 @@ bool ImGuiPanel::OnEvent(Event& e)
 	case Event::Type::KeyPressed:
 		if (io.WantCaptureKeyboard)
 		{
-			io.KeysDown[e.key.key_code] = true;
+			io.KeysDown[(int)e.key.key_code] = true;
 
 			io.KeyCtrl = e.key.ctrl;
 			io.KeyShift = e.key.shift;
@@ -77,7 +77,7 @@ bool ImGuiPanel::OnEvent(Event& e)
 	case Event::Type::KeyReleased:
 		if (io.WantCaptureKeyboard)
 		{
-			io.KeysDown[e.key.key_code] = false;
+			io.KeysDown[(int)e.key.key_code] = false;
 			return true;
 		}
 		break;
@@ -93,7 +93,7 @@ bool ImGuiPanel::OnEvent(Event& e)
 	case Event::Type::MouseButtonPressed:
 		if (io.WantCaptureMouse)
 		{
-			io.MouseDown[e.button.button] = true;
+			io.MouseDown[(int)e.button.button] = true;
 			return true;
 		}
 		break;
@@ -101,7 +101,7 @@ bool ImGuiPanel::OnEvent(Event& e)
 	case Event::Type::MouseButtonReleased:
 		if (io.WantCaptureMouse)
 		{
-			io.MouseDown[e.button.button] = false;
+			io.MouseDown[(int)e.button.button] = false;
 			return true;
 		}
 		break;

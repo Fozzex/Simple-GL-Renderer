@@ -51,12 +51,16 @@ void Application::OnEvent(Event& e)
 
 void Application::Run()
 {
+	float deltaTime;
 	while (!m_Window->Closed())
 	{
+		deltaTime = m_Timer.GetTime(Time::Seconds);
+		m_Timer.Restart();
+
 		m_Window->StartFrame();
 		m_Program->Bind();
 
-		m_SceneManager.GetActiveScene()->Update();
+		m_SceneManager.GetActiveScene()->Update(deltaTime);
 
 		m_UIRenderer.Update();
 		m_Window->EndFrame();

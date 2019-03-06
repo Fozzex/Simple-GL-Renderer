@@ -5,10 +5,11 @@
 class Keyboard
 {
 public:
+	enum class KeyCode;
 
-	static bool KeyPressed(int key);
+	static bool KeyPressed(KeyCode key);
 
-	enum KeyCode : int
+	enum class KeyCode : int
 	{
 		Unknown = -1,
 		Space = GLFW_KEY_SPACE,
@@ -55,9 +56,9 @@ public:
 		X = GLFW_KEY_X,
 		Y = GLFW_KEY_Y,
 		Z = GLFW_KEY_Z,
-		Left_Bracket = GLFW_KEY_LEFT_BRACKET,
+		LeftBracket = GLFW_KEY_LEFT_BRACKET,
 		BackSlash = GLFW_KEY_BACKSLASH,
-		Right_Bracket = GLFW_KEY_RIGHT_BRACKET,
+		RightBracket = GLFW_KEY_RIGHT_BRACKET,
 		Grave = GLFW_KEY_GRAVE_ACCENT,
 		World1 = GLFW_KEY_WORLD_1,
 		World2 = GLFW_KEY_WORLD_2,

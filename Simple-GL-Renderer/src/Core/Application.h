@@ -3,7 +3,8 @@
 #include <array>
 #include <GL/glew.h>
 
-#include "Util/Singleton.h"
+#include "Core/Util/Singleton.h"
+#include "Core/Util/Timer.h"
 #include "Core/Window/Window.h"
 #include "Core/Graphics/SceneManager.h"
 #include "Core/Graphics/UIRenderer.h"
@@ -41,6 +42,7 @@ private:
 	SceneManager m_SceneManager;
 
 	UIRenderer m_UIRenderer;
+	Timer m_Timer;
 
 	std::unique_ptr<VertexShader>   m_VertexShader;
 	std::unique_ptr<FragmentShader> m_FragmentShader;

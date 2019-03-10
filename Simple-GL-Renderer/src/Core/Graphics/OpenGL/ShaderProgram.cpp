@@ -37,6 +37,11 @@ GLint ShaderProgram::GetUniformLocation(const std::string& name) const
 	return glGetUniformLocation(m_ID, name.c_str());
 }
 
+void ShaderProgram::SetVec3(const std::string& name, const glm::vec3& value) const
+{
+	GLCall(glUniform3fv(this->GetUniformLocation(name), 1, glm::value_ptr(value)));
+}
+
 void ShaderProgram::SetMat4(const std::string& name, const glm::mat4& value) const
 {
 	GLCall(glUniformMatrix4fv(this->GetUniformLocation(name), 1, false, glm::value_ptr(value)));

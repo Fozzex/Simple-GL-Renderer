@@ -9,7 +9,7 @@ public:
 	{
 		m_Camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
 		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram(), m_Camera.get());
-		m_CubeMesh = std::make_unique<CubeMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
+		m_CubeMesh = std::make_unique<CubeMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
 		m_CubeTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
 		m_CubeMesh->SetTexture(m_CubeTexture.get());
@@ -23,7 +23,12 @@ public:
 
 		Window::Get()->SetVSync(false);
 
+		m_LightPosition = glm::vec3(1.0f, 3.0f, -2.0f);
+		m_LightColour = glm::vec3(1.0f, 1.0f, 1.0f);
+
 		m_Renderer->SetAmbientStrength(1.0f);
+		m_Renderer->SetLightPosition(m_LightPosition);
+		m_Renderer->SetLightColour(m_LightColour);
 	}
 
 	~TestScene()
@@ -33,7 +38,6 @@ public:
 
 	void Update(float dt) override
 	{
-		Window::Get()->SetTitle("Render Engine | FPS: " + std::to_string(1 / dt));
 		m_DeltaTime = dt;
 		float frameSpeed = m_CamSpeed * dt;
 
@@ -59,6 +63,21 @@ public:
 		ImGui::Begin("Render Engine", &m_MenuOpen);
 
 		ImGui::Text("FPS: %.2f", 1 / dt);
+		ImGui::Separator();
+
+		if (ImGui::SliderFloat("Light Position X", &m_LightPosition.x, -5.0f, 5.0f, "%.2f"))
+			m_Renderer->SetLightPosition(m_LightPosition);
+
+		if (ImGui::SliderFloat("Light Position Y", &m_LightPosition.y, -5.0f, 5.0f, "%.2f"))
+			m_Renderer->SetLightPosition(m_LightPosition);
+
+		if (ImGui::SliderFloat("Light Position Z", &m_LightPosition.z, -5.0f, 5.0f, "%.2f"))
+			m_Renderer->SetLightPosition(m_LightPosition);
+
+		if (ImGui::ColorEdit3("Light Colour", &m_LightColour[0]))
+		{
+			m_Renderer->SetLightColour(m_LightColour);
+		}
 
 		ImGui::End();
 		m_ImGuiPanel->Render(dt);
@@ -117,6 +136,9 @@ private:
 
 	bool m_HasCursor = true;
 	const float m_CamSpeed = 1.0f;
+
+	glm::vec3 m_LightPosition;
+	glm::vec3 m_LightColour;
 };
 
 class Sandbox : public Application

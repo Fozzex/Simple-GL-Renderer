@@ -24,6 +24,8 @@ void BasicMeshRenderer::Flush()
 	m_Program->SetMat4("uViewMatrix", m_Camera->GetViewMatrix());
 
 	m_Program->SetFloat("uAmbientStrength", m_AmbientStrength);
+	m_Program->SetVec3("uLightPosition", m_LightPosition);
+	m_Program->SetVec3("uLightColour", m_LightColour);
 
 	while (!m_RenderQueue.empty())
 	{

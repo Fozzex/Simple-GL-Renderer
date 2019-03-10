@@ -10,6 +10,7 @@
 #include "Core/Graphics/BasicMeshRenderer.h"
 #include "Core/Graphics/Templates/QuadMesh.h"
 #include "Core/Graphics/Camera.h"
+#include "Core/Graphics/Texture2D.h"
 
 class TestScene : public Scene
 {
@@ -23,11 +24,15 @@ public:
 		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram(), m_Camera.get());
 		m_QuadMesh = std::make_unique<QuadMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
 
+		m_QuadTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
+		m_QuadMesh->SetTexture(m_QuadTexture.get());
+
 		m_WindowCentre.x = Window::Get()->GetWidth() / 2.0f;
 		m_WindowCentre.y = Window::Get()->GetHeight() / 2.0f;
 
 		m_MousePosition = m_WindowCentre;
-		std::cout << glm::radians(0.0f) << std::endl;
+
+		Window::Get()->SetVSync(false);
 	}
 
 	~TestScene()
@@ -37,6 +42,7 @@ public:
 
 	void Update(float dt) override
 	{
+		Window::Get()->SetTitle("Render Engine | FPS: " + std::to_string(1 / dt));
 		m_DeltaTime = dt;
 		float frameSpeed = m_CamSpeed * dt;
 
@@ -96,6 +102,7 @@ private:
 
 	std::unique_ptr<BasicMeshRenderer> m_Renderer;
 	std::unique_ptr<QuadMesh> m_QuadMesh;
+	std::unique_ptr<Texture2D> m_QuadTexture;
 	std::unique_ptr<Camera> m_Camera;
 
 	float m_DeltaTime;

@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)$(ProjectName)\src\;$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLM\include\;$(SolutionDir)Dependencies\ImGui\include\;$(SolutionDir)Dependencies\stb\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>IMGUI_IMPL_OPENGL_LOADER_GLEW;GLFW_INCLUDE_NONE;GLEW_STATIC;RENDERER_DEBUG;GLFW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -161,7 +161,9 @@
     <ClCompile Include="src\Core\Graphics\SceneManager.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\ShaderProgram.cpp" />
+    <ClCompile Include="src\Core\Graphics\stb_image.cpp" />
     <ClCompile Include="src\Core\Graphics\Templates\QuadMesh.cpp" />
+    <ClCompile Include="src\Core\Graphics\Texture2D.cpp" />
     <ClCompile Include="src\Core\Graphics\UIRenderer.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexBuffer.cpp" />
@@ -188,6 +190,7 @@
     <ClInclude Include="src\Core\Graphics\OpenGL\Shader.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\ShaderProgram.h" />
     <ClInclude Include="src\Core\Graphics\Templates\QuadMesh.h" />
+    <ClInclude Include="src\Core\Graphics\Texture2D.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />
     <ClInclude Include="src\Core\Graphics\UIRenderer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexArray.h" />

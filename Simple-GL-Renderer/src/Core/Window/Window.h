@@ -22,6 +22,9 @@ public:
 	void StartFrame();
 	void EndFrame();
 
+	void SetVSync(bool enable);
+	void SetTitle(const std::string& title);
+
 	inline void SetEventCallback(const CallbackFn& callback) { m_Callback = callback; }
 
 	inline bool Closed() const { return glfwWindowShouldClose(m_Window); }
@@ -39,6 +42,7 @@ private:
 	GLFWwindow* m_Window;
 	std::string m_Title;
 	int m_Width, m_Height;
+	bool m_IsVSync;
 	CallbackFn m_Callback;
 
 private:

@@ -8,11 +8,13 @@
 #include "OpenGL/VertexBuffer.h"
 #include "OpenGL/IndexBuffer.h"
 #include "OpenGL/VertexArray.h"
+#include "Core/Graphics/Texture2D.h"
 
 struct Vertex
 {
 	glm::vec3 position;
 	glm::vec3 colour;
+	glm::vec2 textureCoord;
 };
 
 class Mesh
@@ -24,6 +26,9 @@ public:
 
 	void UpdateModelMatrix();
 	void Draw();
+
+	inline void SetTexture(Texture2D* texture) { m_Texture = texture; }
+	inline Texture2D* GetTexture() const { return m_Texture; }
 
 	inline void ResetModelMatrix() { m_ModelMatrix = glm::mat4(1); }
 	inline glm::mat4 GetModelMatrix() const { return m_ModelMatrix; }
@@ -48,5 +53,7 @@ private:
 	glm::mat4 m_Rotation;
 
 	glm::mat4 m_ModelMatrix;
+
+	Texture2D* m_Texture = nullptr;
 
 };

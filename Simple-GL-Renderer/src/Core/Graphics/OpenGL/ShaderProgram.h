@@ -18,6 +18,7 @@ public:
 	inline void Bind() const { glUseProgram(m_ID); }
 
 	void SetMat4(const std::string& name, const glm::mat4& value) const;
+	void SetInt(const std::string& name, int value) const;
 
 private:
 

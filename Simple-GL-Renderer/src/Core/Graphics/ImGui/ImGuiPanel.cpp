@@ -52,7 +52,7 @@ void ImGuiPanel::Update()
 	ImGui::End();
 
 	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());  
 }
 
 bool ImGuiPanel::OnEvent(Event& e)

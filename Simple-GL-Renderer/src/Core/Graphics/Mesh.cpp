@@ -10,6 +10,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<GLushort>& ind
 
 	m_VertexBuffer.SetElementLayout(0, 3, sizeof(Vertex), 0);
 	m_VertexBuffer.SetElementLayout(1, 3, sizeof(Vertex), offsetof(Vertex, colour));
+	m_VertexBuffer.SetElementLayout(2, 2, sizeof(Vertex), offsetof(Vertex, textureCoord));
 
 	m_IndexBuffer.Bind();
 	m_IndexBuffer.BufferData(m_Indices.size() * sizeof(GLushort), m_Indices.size(), m_Indices.data(), GL_STATIC_DRAW);

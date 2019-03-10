@@ -4,6 +4,7 @@
 #include "MeshRenderer.h"
 #include "Core/Graphics/OpenGL/ShaderProgram.h"
 #include "Core/Graphics/Camera.h"
+#include "Core/Graphics/Texture2D.h"
 
 class BasicMeshRenderer : public MeshRenderer
 {

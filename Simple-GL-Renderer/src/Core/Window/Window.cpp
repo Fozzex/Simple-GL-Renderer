@@ -29,6 +29,8 @@ Window::Window(const std::string& title, int width, int height) :
 	glfwSetScrollCallback(m_Window, Window::MouseScrollCallback);
 	glfwSetWindowSizeCallback(m_Window, Window::WindowResizeCallback);
 	glfwSetWindowCloseCallback(m_Window, Window::WindowCloseCallback);
+
+	m_IsVSync = true;
 }
 
 Window::~Window()
@@ -47,6 +49,17 @@ void Window::EndFrame()
 {
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
+}
+
+void Window::SetVSync(bool enable)
+{
+	m_IsVSync = enable;
+	glfwSwapInterval(static_cast<int>(enable));
+}
+
+void Window::SetTitle(const std::string& title)
+{
+	glfwSetWindowTitle(m_Window, title.c_str());
 }
 
 void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)

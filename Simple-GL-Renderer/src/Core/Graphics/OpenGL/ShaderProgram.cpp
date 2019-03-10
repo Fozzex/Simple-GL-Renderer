@@ -41,3 +41,8 @@ void ShaderProgram::SetMat4(const std::string& name, const glm::mat4& value) con
 {
 	GLCall(glUniformMatrix4fv(this->GetUniformLocation(name), 1, false, glm::value_ptr(value)));
 }
+
+void ShaderProgram::SetInt(const std::string& name, int value) const
+{
+	GLCall(glUniform1i(this->GetUniformLocation(name), value));
+}

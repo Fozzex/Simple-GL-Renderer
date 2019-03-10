@@ -35,21 +35,19 @@ ImGuiPanel::ImGuiPanel()
 	io.KeyMap[ImGuiKey_Z]		    = static_cast<int>(Keyboard::KeyCode::Z);
 }
 
-void ImGuiPanel::Update()
+void ImGuiPanel::StartFrame()
 {
 	ImGuiIO& io = ImGui::GetIO();
 	io.DisplaySize = ImVec2((float)Window::Get()->GetWidth(), (float)Window::Get()->GetHeight());
 
-	float time = (float)glfwGetTime();
-	io.DeltaTime = time - m_LastFrameTime;
-	m_LastFrameTime = time;
-
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
+}
 
-	ImGui::Begin("Render Engine GUI", &m_ShowMainWindow);
-
-	ImGui::End();
+void ImGuiPanel::Render(float dt)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = dt;
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());  

@@ -1,6 +1,5 @@
 #pragma once
 #include "Core/Input/Event.h"
-#include "Core/Graphics/UIRenderer.h"
 
 class Scene
 {

@@ -24,8 +24,6 @@ Application::Application(const std::string& title, int width, int height)
 	m_Program->Attach(m_FragmentShader.get());
 
 	m_Program->Link();
-
-	this->RegisterUIPanel(new ImGuiPanel());
 }
 
 Application::~Application()
@@ -38,15 +36,10 @@ void Application::RegisterScene(Scene* scene)
 	m_SceneManager.Push(scene);
 }
 
-void Application::RegisterUIPanel(UIPanel* panel)
-{
-	m_UIRenderer.AddPanel(panel);
-}
 
 void Application::OnEvent(Event& e)
 {
-	if (!m_UIRenderer.PassEvent(e))
-		m_SceneManager.GetActiveScene()->OnEvent(e);
+	m_SceneManager.GetActiveScene()->OnEvent(e);
 }
 
 void Application::Run()
@@ -62,7 +55,6 @@ void Application::Run()
 
 		m_SceneManager.GetActiveScene()->Update(deltaTime);
 
-		m_UIRenderer.Update();
 		m_Window->EndFrame();
 	}
 }

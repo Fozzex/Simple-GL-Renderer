@@ -1,16 +1,5 @@
 #include <iostream>
-
-#include "Core/Application.h"
-#include "Core/Window/Window.h"
-#include "Core/Input/Keyboard.h"
-#include "Core/Input/Mouse.h"
-#include "Core/Graphics/Scene.h"
-#include "Core/Graphics/UIPanel.h"
-#include "Core/Graphics/Mesh.h"
-#include "Core/Graphics/BasicMeshRenderer.h"
-#include "Core/Graphics/Templates/QuadMesh.h"
-#include "Core/Graphics/Camera.h"
-#include "Core/Graphics/Texture2D.h"
+#include "Core/RenderEngine.h"
 
 class TestScene : public Scene
 {
@@ -18,14 +7,14 @@ public:
 
 	TestScene() 
 	{
-		std::cout << "TestScene Registered" << std::endl;
-
 		m_Camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
 		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram(), m_Camera.get());
 		m_QuadMesh = std::make_unique<QuadMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
 
 		m_QuadTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
 		m_QuadMesh->SetTexture(m_QuadTexture.get());
+
+		m_ImGuiPanel = std::make_unique<ImGuiPanel>();
 
 		m_WindowCentre.x = Window::Get()->GetWidth() / 2.0f;
 		m_WindowCentre.y = Window::Get()->GetHeight() / 2.0f;
@@ -63,10 +52,21 @@ public:
 		m_QuadMesh->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		m_Renderer->Flush();
+
+		m_ImGuiPanel->StartFrame();
+		ImGui::Begin("Render Engine", &m_MenuOpen);
+
+		ImGui::Text("FPS: %.2f", 1 / dt);
+
+		ImGui::End();
+		m_ImGuiPanel->Render(dt);
 	}
 
 	void OnEvent(Event& e) override
 	{
+		if (m_ImGuiPanel->OnEvent(e))
+			return;
+
 		switch (e.type)
 		{
 		case Event::Type::KeyPressed:
@@ -105,6 +105,9 @@ private:
 	std::unique_ptr<Texture2D> m_QuadTexture;
 	std::unique_ptr<Camera> m_Camera;
 
+	std::unique_ptr<ImGuiPanel> m_ImGuiPanel;
+	bool m_MenuOpen = true;
+
 	float m_DeltaTime;
 	float m_Sensitivity = 0.1f;
 	glm::vec3 m_MousePosition;
@@ -126,7 +129,6 @@ public:
 
 	~Sandbox()
 	{
-		std::cout << "Sandbox Destroyed" << std::endl;
 	}
 	
 };

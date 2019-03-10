@@ -7,7 +7,6 @@
 #include "Core/Util/Timer.h"
 #include "Core/Window/Window.h"
 #include "Core/Graphics/SceneManager.h"
-#include "Core/Graphics/UIRenderer.h"
 #include "Core.h"
 
 #include "Core/Graphics/OpenGL/VertexShader.h"
@@ -15,8 +14,6 @@
 #include "Core/Graphics/OpenGL/ShaderProgram.h"
 
 #include "Core/Graphics/Mesh.h"
-
-#include "Core/Graphics/ImGui/ImGuiPanel.h"
 
 class Application : public Singleton
 {
@@ -27,7 +24,6 @@ public:
 	virtual ~Application();
 
 	void RegisterScene(Scene* scene);
-	void RegisterUIPanel(UIPanel* panel);
 	
 	void OnEvent(Event& e);
 
@@ -41,7 +37,6 @@ private:
 	std::unique_ptr<Window> m_Window;
 	SceneManager m_SceneManager;
 
-	UIRenderer m_UIRenderer;
 	Timer m_Timer;
 
 	std::unique_ptr<VertexShader>   m_VertexShader;

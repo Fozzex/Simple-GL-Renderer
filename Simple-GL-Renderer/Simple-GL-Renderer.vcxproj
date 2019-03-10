@@ -164,7 +164,6 @@
     <ClCompile Include="src\Core\Graphics\stb_image.cpp" />
     <ClCompile Include="src\Core\Graphics\Templates\QuadMesh.cpp" />
     <ClCompile Include="src\Core\Graphics\Texture2D.cpp" />
-    <ClCompile Include="src\Core\Graphics\UIRenderer.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexArray.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexBuffer.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexShader.cpp" />
@@ -192,13 +191,13 @@
     <ClInclude Include="src\Core\Graphics\Templates\QuadMesh.h" />
     <ClInclude Include="src\Core\Graphics\Texture2D.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />
-    <ClInclude Include="src\Core\Graphics\UIRenderer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexArray.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexShader.h" />
     <ClInclude Include="src\Core\Input\Event.h" />
     <ClInclude Include="src\Core\Input\Keyboard.h" />
     <ClInclude Include="src\Core\Input\Mouse.h" />
+    <ClInclude Include="src\Core\RenderEngine.h" />
     <ClInclude Include="src\Core\Util\NonCopyable.h" />
     <ClInclude Include="src\Core\Util\NonMovable.h" />
     <ClInclude Include="src\Core\Util\Singleton.h" />

@@ -13,7 +13,9 @@ public:
 
 	ImGuiPanel();
 
-	void Update() override;
+	void StartFrame();
+
+	void Render(float dt) override;
 	bool OnEvent(Event& e) override;
 
 	bool IsActive() override;

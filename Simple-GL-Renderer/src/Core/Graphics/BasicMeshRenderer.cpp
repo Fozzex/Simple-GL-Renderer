@@ -19,6 +19,12 @@ void BasicMeshRenderer::Submit(Mesh* mesh)
 void BasicMeshRenderer::Flush()
 {
 	m_Program->Bind();
+
+	m_Program->SetMat4("uProjMatrix", m_Camera->GetProjMatrix());
+	m_Program->SetMat4("uViewMatrix", m_Camera->GetViewMatrix());
+
+	m_Program->SetFloat("uAmbientStrength", m_AmbientStrength);
+
 	while (!m_RenderQueue.empty())
 	{
 		Mesh* mesh = m_RenderQueue.front();
@@ -39,8 +45,6 @@ void BasicMeshRenderer::Flush()
 		mesh->UpdateModelMatrix();
 		
 		m_Program->SetMat4("uModelMatrix", mesh->GetModelMatrix());
-		m_Program->SetMat4("uProjMatrix", m_Camera->GetProjMatrix());
-		m_Program->SetMat4("uViewMatrix", m_Camera->GetViewMatrix());
 
 		mesh->Draw();
 

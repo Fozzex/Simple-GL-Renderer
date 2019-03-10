@@ -9,10 +9,10 @@ public:
 	{
 		m_Camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
 		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram(), m_Camera.get());
-		m_QuadMesh = std::make_unique<QuadMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
+		m_CubeMesh = std::make_unique<CubeMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(0.9f, 0.7f, 0.3f));
 
-		m_QuadTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
-		m_QuadMesh->SetTexture(m_QuadTexture.get());
+		m_CubeTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
+		m_CubeMesh->SetTexture(m_CubeTexture.get());
 
 		m_ImGuiPanel = std::make_unique<ImGuiPanel>();
 
@@ -22,6 +22,8 @@ public:
 		m_MousePosition = m_WindowCentre;
 
 		Window::Get()->SetVSync(false);
+
+		m_Renderer->SetAmbientStrength(1.0f);
 	}
 
 	~TestScene()
@@ -48,8 +50,8 @@ public:
 		if (Keyboard::KeyPressed(Keyboard::KeyCode::Space))
 			m_Camera->Move(0.0f, frameSpeed, 0.0f);
 
-		m_Renderer->Submit(m_QuadMesh.get());
-		m_QuadMesh->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+		m_Renderer->Submit(m_CubeMesh.get());
+		m_CubeMesh->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		m_Renderer->Flush();
 
@@ -101,8 +103,8 @@ public:
 private:
 
 	std::unique_ptr<BasicMeshRenderer> m_Renderer;
-	std::unique_ptr<QuadMesh> m_QuadMesh;
-	std::unique_ptr<Texture2D> m_QuadTexture;
+	std::unique_ptr<CubeMesh> m_CubeMesh;
+	std::unique_ptr<Texture2D> m_CubeTexture;
 	std::unique_ptr<Camera> m_Camera;
 
 	std::unique_ptr<ImGuiPanel> m_ImGuiPanel;

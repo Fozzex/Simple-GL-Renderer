@@ -16,11 +16,15 @@ public:
 	void Submit(Mesh* mesh) override;
 	void Flush() override;
 
+	inline void SetAmbientStrength(float strength) { m_AmbientStrength = strength; }
+
 private:
 
 	std::deque<Mesh*> m_RenderQueue;
 
 	const ShaderProgram* m_Program;
 	Camera* m_Camera;
+
+	float m_AmbientStrength = 1.0f;
 
 };

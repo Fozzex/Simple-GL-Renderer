@@ -18,3 +18,4 @@
 #include "Core/Graphics/ImGui/ImGuiPanel.h"
 
 #include "Core/Graphics/Templates/QuadMesh.h"
+#include "Core/Graphics/Templates/CubeMesh.h"

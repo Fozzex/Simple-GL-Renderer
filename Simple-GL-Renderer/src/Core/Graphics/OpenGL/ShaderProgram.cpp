@@ -46,3 +46,8 @@ void ShaderProgram::SetInt(const std::string& name, int value) const
 {
 	GLCall(glUniform1i(this->GetUniformLocation(name), value));
 }
+
+void ShaderProgram::SetFloat(const std::string& name, float value) const
+{
+	GLCall(glUniform1f(this->GetUniformLocation(name), value));
+}

@@ -22,6 +22,8 @@ Window::Window(const std::string& title, int width, int height) :
 	glfwSetWindowUserPointer(m_Window, &m_Callback);
 	glViewport(0, 0, m_Width, m_Height);
 
+	GLCall(glEnable(GL_DEPTH_TEST));
+
 	glfwSetKeyCallback(m_Window, Window::KeyCallback);
 	glfwSetCharCallback(m_Window, Window::CharCallback);
 	glfwSetCursorPosCallback(m_Window, Window::CursorPosCallback);

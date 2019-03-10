@@ -162,6 +162,7 @@
     <ClCompile Include="src\Core\Graphics\OpenGL\Shader.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\ShaderProgram.cpp" />
     <ClCompile Include="src\Core\Graphics\stb_image.cpp" />
+    <ClCompile Include="src\Core\Graphics\Templates\CubeMesh.cpp" />
     <ClCompile Include="src\Core\Graphics\Templates\QuadMesh.cpp" />
     <ClCompile Include="src\Core\Graphics\Texture2D.cpp" />
     <ClCompile Include="src\Core\Graphics\OpenGL\VertexArray.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="src\Core\Graphics\SceneManager.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\Shader.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\ShaderProgram.h" />
+    <ClInclude Include="src\Core\Graphics\Templates\CubeMesh.h" />
     <ClInclude Include="src\Core\Graphics\Templates\QuadMesh.h" />
     <ClInclude Include="src\Core\Graphics\Texture2D.h" />
     <ClInclude Include="src\Core\Graphics\UIPanel.h" />

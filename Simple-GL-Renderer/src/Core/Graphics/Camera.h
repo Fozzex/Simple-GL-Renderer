@@ -20,6 +20,8 @@ public:
 	glm::mat4 GetViewMatrix();
 	inline glm::mat4 GetProjMatrix() { return m_ProjMatrix; }
 
+	inline glm::vec3 GetPosition() const { return m_Position; }
+
 private:
 
 	void UpdateAngles();

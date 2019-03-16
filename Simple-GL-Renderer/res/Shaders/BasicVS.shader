@@ -10,7 +10,7 @@ out vec2 fTexCoord;
 out vec4 fNoTexture;
 out vec3 fNormal;
 
-out vec3 fFragPos;
+out vec3 fFragPosition;
 
 uniform mat4 uModelMatrix = mat4(1);
 uniform mat4 uProjMatrix = mat4(1);
@@ -25,7 +25,7 @@ void main()
 	fNormal = aNormal;
 	gl_Position = uProjMatrix * uViewMatrix * uModelMatrix * vec4(aPosition, 1.0);
 
-	fFragPos = vec3(uModelMatrix * vec4(aPosition, 1.0));
+	fFragPosition = vec3(uModelMatrix * vec4(aPosition, 1.0));
 
 	if (uNoTexture == 1)
 		fNoTexture = vec4(1.0, 1.0, 1.0, 1.0);

@@ -9,7 +9,7 @@ public:
 	{
 		m_Camera = std::make_unique<Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
 		m_Renderer = std::make_unique<BasicMeshRenderer>(Application::Get()->GetProgram(), m_Camera.get());
-		m_CubeMesh = std::make_unique<CubeMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		m_CubeMesh = std::make_unique<CubeMesh>(glm::vec3(0.0f, -1.0f, 0.0f), glm::vec3(1.0f, 0.5f, 0.31f));
 
 		m_CubeTexture = std::make_unique<Texture2D>("res/Textures/pavement.jpg");
 		m_CubeMesh->SetTexture(m_CubeTexture.get());
@@ -26,7 +26,9 @@ public:
 		m_LightPosition = glm::vec3(1.0f, 3.0f, -2.0f);
 		m_LightColour = glm::vec3(1.0f, 1.0f, 1.0f);
 
-		m_Renderer->SetAmbientStrength(1.0f);
+		m_Renderer->SetAmbientStrength(0.2f);
+		m_Renderer->SetSpecularStrength(1.0f);
+
 		m_Renderer->SetLightPosition(m_LightPosition);
 		m_Renderer->SetLightColour(m_LightColour);
 	}
@@ -147,7 +149,6 @@ public:
 
 	Sandbox() : Application("OpenGL Renderer", 1280, 720)
 	{
-		std::cout << "Sandbox Constructed" << std::endl;
 		this->RegisterScene(new TestScene());
 	}
 

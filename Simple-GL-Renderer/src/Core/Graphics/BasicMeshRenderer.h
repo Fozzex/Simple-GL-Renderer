@@ -17,6 +17,8 @@ public:
 	void Flush() override;
 
 	inline void SetAmbientStrength(float strength) { m_AmbientStrength = strength; }
+	inline void SetSpecularStrength(float strength) { m_SpecularStrength = strength; }
+
 	inline void SetLightPosition(const glm::vec3& position) { m_LightPosition = position; }
 	inline void SetLightColour(const glm::vec3& colour) { m_LightColour = colour; }
 
@@ -30,6 +32,8 @@ private:
 	Camera* m_Camera;
 
 	float m_AmbientStrength = 1.0f;
+	float m_SpecularStrength = 0.0f;
+
 	glm::vec3 m_LightPosition = glm::vec3(0.0f);
 	glm::vec3 m_LightColour = glm::vec3(1.0f, 1.0f, 1.0f);
 

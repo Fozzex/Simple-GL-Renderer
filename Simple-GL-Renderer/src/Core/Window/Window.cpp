@@ -66,109 +66,95 @@ void Window::SetTitle(const std::string& title)
 
 void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	Event e;
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+
 	switch (action)
 	{
 	case GLFW_PRESS:
-		e.type = Event::Type::KeyPressed;
-		break;
-
+		{
+			KeyPressedEvent evnt((Keyboard::KeyCode)key, 0);
+			callback(evnt);
+			break;
+		}
 	case GLFW_RELEASE:
-		e.type = Event::Type::KeyReleased;
-		break;
-
+		{
+			KeyReleasedEvent evnt((Keyboard::KeyCode)key);
+			callback(evnt);
+			break;
+		}
 	case GLFW_REPEAT:
-		e.type = Event::Type::KeyPressed;
-		break;
-
+		{
+			KeyPressedEvent evnt((Keyboard::KeyCode)key, 1);
+			callback(evnt);
+			break;
+		}
 	}
-
-	e.key.key_code = static_cast<Keyboard::KeyCode>(key);
-	e.key.shift = mods & GLFW_MOD_SHIFT;
-	e.key.ctrl = mods & GLFW_MOD_CONTROL;
-	e.key.alt = mods & GLFW_MOD_ALT;
-	e.key.option = mods & GLFW_MOD_SUPER;
-
-	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
 }
 
 void Window::CharCallback(GLFWwindow* window, unsigned int codepoint)
 {
-	Event e;
-	e.type = Event::Type::KeyTyped;
-
-	e.text.character = (char)codepoint;
-
 	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
+
+	KeyTypedEvent evnt((char)codepoint);
+	evnt.SetTypeIndex<KeyTypedEvent>();
+	callback(evnt);
 }
 
 void Window::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 {
-	Event e;
-	e.type = Event::Type::MouseMoved;
-
-	e.mouse.x = xpos;
-	e.mouse.y = ypos;
-
 	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
+
+	MouseMovedEvent evnt(xpos, ypos);
+	evnt.SetTypeIndex<MouseMovedEvent>();
+	callback(evnt);
 }
 
 void Window::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-	Event e;
+	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
+	
 	switch (action)
 	{
 	case GLFW_PRESS:
-		e.type = Event::Type::MouseButtonPressed;
-		break;
-
+		{
+			MouseButtonPressedEvent evnt(button);
+			evnt.SetTypeIndex<MouseButtonPressedEvent>();
+			callback(evnt);
+			break;
+		}
 	case GLFW_RELEASE:
-		e.type = Event::Type::MouseButtonReleased;
-		break;
+		{
+			MouseButtonReleasedEvent evnt(button);
+			evnt.SetTypeIndex<MouseButtonReleasedEvent>();
+			callback(evnt);
+			break;
+		}
 	}
-
-	e.button.button = static_cast<Mouse::Button>(button);
-	e.button.shift  = mods & GLFW_MOD_SHIFT;
-	e.button.ctrl   = mods & GLFW_MOD_CONTROL;
-	e.button.alt    = mods & GLFW_MOD_ALT;
-	e.button.option = mods & GLFW_MOD_SUPER;
-
-	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
 }
 
 void Window::MouseScrollCallback(GLFWwindow* window, double xoff, double yoff)
 {
-	Event e;
-	e.type = Event::Type::MouseScrolled;
-
-	e.scroll.x_offset = xoff;
-	e.scroll.y_offset = yoff;
-
 	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
+	
+	MouseScrolledEvent evnt(xoff, yoff);
+	evnt.SetTypeIndex<MouseScrolledEvent>();
+	callback(evnt);
 }
 
 void Window::WindowResizeCallback(GLFWwindow* window, int width, int height)
 {
-	Event e;
-	e.type = Event::Type::WindowResized;
-
-	e.window.width = width;
-	e.window.height = height;
-
 	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
+
+	WindowResizedEvent evnt(width, height);
+	evnt.SetTypeIndex<WindowResizedEvent>();
+	callback(evnt);
 }
 
 void Window::WindowCloseCallback(GLFWwindow* window)
 {
-	Event e;
-	e.type = Event::Type::WindowClosed;
-
 	CallbackFn callback = *reinterpret_cast<CallbackFn*>(glfwGetWindowUserPointer(window));
-	callback(e);
+	
+	WindowClosedEvent evnt;
+	evnt.SetTypeIndex<WindowClosedEvent>();
+	callback(evnt);
 }

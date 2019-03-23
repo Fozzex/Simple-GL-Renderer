@@ -9,6 +9,9 @@
 #include "Core/Core.h"
 #include "Core/Util/Singleton.h"
 #include "Core/Input/Event.h"
+#include "Core/Input/KeyEvent.h"
+#include "Core/Input/MouseEvent.h"
+#include "Core/Input/WindowEvent.h"
 
 class Window : public Singleton
 {

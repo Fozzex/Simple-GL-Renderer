@@ -90,35 +90,50 @@ public:
 		if (m_ImGuiPanel->OnEvent(e))
 			return;
 
-		switch (e.type)
+		EventDispatcher dispatcher(e);
+
+		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_CALLBACK(TestScene::OnKeyPressed));
+		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_CALLBACK(TestScene::OnMouseMoved));
+	}
+
+private:
+
+	bool OnKeyPressed(KeyPressedEvent& e)
+	{
+		if (e.GetKeyCode() == Keyboard::KeyCode::Z)
 		{
-		case Event::Type::KeyPressed:
-			if (e.key.key_code == Keyboard::KeyCode::Z)
-			{
-				m_HasCursor = !m_HasCursor;
-				Mouse::SetPosition(m_WindowCentre.x, m_WindowCentre.y);
-				Mouse::SetCursorHidden(!m_HasCursor);
-			}
-			break;
-		case Event::Type::MouseMoved:
-			if (!m_HasCursor)
-			{
-				glm::vec3 offset;
+			m_HasCursor = !m_HasCursor;
+			Mouse::SetPosition(m_WindowCentre.x, m_WindowCentre.y);
+			Mouse::SetCursorHidden(!m_HasCursor);
 
-				m_MousePosition.x = (float)e.mouse.x;
-				m_MousePosition.y = (float)e.mouse.y;
-
-				offset.x = m_MousePosition.x - m_WindowCentre.x;
-				offset.y = m_WindowCentre.y - m_MousePosition.y;
-				offset.z = 0.0f;
-
-				offset *= m_Sensitivity;
-
-				m_Camera->Rotate(offset);
-				Mouse::SetPosition(m_WindowCentre.x, m_WindowCentre.y);
-			}
-			break;
+			return true;
 		}
+
+		return false;
+	}
+
+	bool OnMouseMoved(MouseMovedEvent& e)
+	{
+		if (!m_HasCursor)
+		{
+			glm::vec3 offset;
+
+			m_MousePosition.x = (float)e.GetX();
+			m_MousePosition.y = (float)e.GetY();
+
+			offset.x = m_MousePosition.x - m_WindowCentre.x;
+			offset.y = m_WindowCentre.y - m_MousePosition.y;
+			offset.z = 0.0f;
+
+			offset *= m_Sensitivity;
+
+			m_Camera->Rotate(offset);
+			Mouse::SetPosition(m_WindowCentre.x, m_WindowCentre.y);
+
+			return true;
+		}
+
+		return false;
 	}
 
 private:

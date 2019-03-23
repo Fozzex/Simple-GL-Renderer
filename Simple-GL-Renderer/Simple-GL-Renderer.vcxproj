@@ -197,8 +197,12 @@
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexBuffer.h" />
     <ClInclude Include="src\Core\Graphics\OpenGL\VertexShader.h" />
     <ClInclude Include="src\Core\Input\Event.h" />
+    <ClInclude Include="src\Core\Input\EventDispatcher.h" />
     <ClInclude Include="src\Core\Input\Keyboard.h" />
+    <ClInclude Include="src\Core\Input\KeyEvent.h" />
     <ClInclude Include="src\Core\Input\Mouse.h" />
+    <ClInclude Include="src\Core\Input\MouseEvent.h" />
+    <ClInclude Include="src\Core\Input\WindowEvent.h" />
     <ClInclude Include="src\Core\RenderEngine.h" />
     <ClInclude Include="src\Core\Util\NonCopyable.h" />
     <ClInclude Include="src\Core\Util\NonMovable.h" />

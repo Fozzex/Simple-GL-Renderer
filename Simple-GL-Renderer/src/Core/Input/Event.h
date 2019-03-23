@@ -1,73 +1,23 @@
 #pragma once
-#include "Core/Input/Keyboard.h"
-#include "Core/Input/Mouse.h"
+#include <typeindex>
+#include <string>
 
 class Event
 {
+	std::type_index m_TypeIndex = typeid(Event);
 public:
 
-	struct KeyEvent
-	{
-		Keyboard::KeyCode key_code;
+	Event() = default;
+	virtual ~Event() = default;
 
-		bool alt;
-		bool ctrl;
-		bool shift;
-		bool option;
-	};
+	virtual std::string ToString() const = 0;
 
-	struct KeyTypeEvent
-	{
-		char character;
-	};
+	inline std::type_index GetTypeIndex() const { return m_TypeIndex; }
+	
+	template<class TEvent>
+	inline void SetTypeIndex() { m_TypeIndex = typeid(TEvent); }
 
-	struct MouseMoveEvent
-	{
-		double x, y;
-	};
-
-	struct MouseButtonEvent
-	{
-		Mouse::Button button;
-
-		bool alt;
-		bool ctrl;
-		bool shift;
-		bool option;
-	};
-
-	struct MouseScrollEvent
-	{
-		double x_offset, y_offset;
-	};
-
-	struct WindowResizeEvent
-	{
-		int width, height;
-	};
-
-	enum Type
-	{
-		KeyPressed,
-		KeyReleased,
-		KeyTyped,
-		MouseMoved,
-		MouseButtonPressed,
-		MouseButtonReleased,
-		MouseScrolled,
-		WindowResized,
-		WindowClosed
-	} type;
-
-	union
-	{
-		KeyEvent key;
-		KeyTypeEvent text;
-		MouseMoveEvent mouse;
-		MouseButtonEvent button;
-		MouseScrollEvent scroll;
-		WindowResizeEvent window;
-	};
+public:
 
 	bool handled = false;
 

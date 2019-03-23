@@ -1,4 +1,5 @@
 #include "ImGuiPanel.h"
+#include "Core/Input/EventDispatcher.h"
 
 ImGuiPanel::ImGuiPanel()
 {
@@ -8,10 +9,9 @@ ImGuiPanel::ImGuiPanel()
 	ImGui_ImplOpenGL3_Init("#version 330");
 
 	ImGuiIO& io = ImGui::GetIO();
-	io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;         // We can honor GetMouseCursor() values (optional)
-	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;          // We can honor io.WantSetMousePos requests (optional, rarely used)
+	io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
+	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
-	// Keyboard mapping. ImGui will use those indices to peek into the io.KeysDown[] array.
 	io.KeyMap[ImGuiKey_Tab]		    = static_cast<int>(Keyboard::KeyCode::Tab);
 	io.KeyMap[ImGuiKey_LeftArrow]   = static_cast<int>(Keyboard::KeyCode::Left);
 	io.KeyMap[ImGuiKey_RightArrow]  = static_cast<int>(Keyboard::KeyCode::Right);
@@ -53,80 +53,125 @@ void ImGuiPanel::Render(float dt)
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());  
 }
 
-bool ImGuiPanel::OnEvent(Event& e)
+bool ImGuiPanel::IsActive()
+{
+	return m_ShowMainWindow;
+}
+
+bool ImGuiPanel::OnKeyPressed(KeyPressedEvent& e)
 {
 	ImGuiIO& io = ImGui::GetIO();
-	switch (e.type)
+
+	if (io.WantCaptureKeyboard)
 	{
-	case Event::Type::KeyPressed:
-		if (io.WantCaptureKeyboard)
-		{
-			io.KeysDown[(int)e.key.key_code] = true;
+		io.KeysDown[(int)e.GetKeyCode()] = true;
 
-			io.KeyCtrl = e.key.ctrl;
-			io.KeyShift = e.key.shift;
-			io.KeyAlt = e.key.alt;
-			io.KeySuper = e.key.option;
+		io.KeyCtrl = Keyboard::KeyPressed(Keyboard::KeyCode::LeftCtrl) || Keyboard::KeyPressed(Keyboard::KeyCode::RightCtrl);
+		io.KeyShift = Keyboard::KeyPressed(Keyboard::KeyCode::LeftShift) || Keyboard::KeyPressed(Keyboard::KeyCode::RightShift);
+		io.KeyAlt = Keyboard::KeyPressed(Keyboard::KeyCode::LeftAlt) || Keyboard::KeyPressed(Keyboard::KeyCode::RightAlt);
+		io.KeySuper = Keyboard::KeyPressed(Keyboard::KeyCode::LeftSuper) || Keyboard::KeyPressed(Keyboard::KeyCode::RightSuper);
 
-			return true;
-		}
-		break;
-
-	case Event::Type::KeyReleased:
-		if (io.WantCaptureKeyboard)
-		{
-			io.KeysDown[(int)e.key.key_code] = false;
-			return true;
-		}
-		break;
-
-	case Event::Type::KeyTyped:
-		if (io.WantTextInput)
-		{
-			io.AddInputCharacter(e.text.character);
-			return true;
-		}
-		break;
-
-	case Event::Type::MouseButtonPressed:
-		if (io.WantCaptureMouse)
-		{
-			io.MouseDown[(int)e.button.button] = true;
-			return true;
-		}
-		break;
-
-	case Event::Type::MouseButtonReleased:
-		if (io.WantCaptureMouse)
-		{
-			io.MouseDown[(int)e.button.button] = false;
-			return true;
-		}
-		break;
-
-	case Event::Type::MouseMoved:
-		io.MousePos = ImVec2((float)e.mouse.x, (float)e.mouse.y);
-		break;
-
-	case Event::Type::MouseScrolled:
-		if (io.WantCaptureMouse)
-		{
-			io.MouseWheel += (float)e.scroll.y_offset;
-			io.MouseWheelH += (float)e.scroll.x_offset;
-			return true;
-		}
-		break;
-
-	case Event::Type::WindowResized:
-		io.DisplaySize = ImVec2((float)e.window.width, (float)e.window.height);
-		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-		break;
+		return true;
 	}
 
 	return false;
 }
 
-bool ImGuiPanel::IsActive()
+bool ImGuiPanel::OnEvent(Event& e)
 {
-	return m_ShowMainWindow;
+	EventDispatcher dispatcher(e);
+
+	dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnKeyPressed));
+	dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnKeyReleased));
+	dispatcher.Dispatch<KeyTypedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnKeyTyped));
+	dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnMousePressed));
+	dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnMouseReleased));
+	dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnMouseMoved));
+	dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnMouseScrolled));
+	dispatcher.Dispatch<WindowResizedEvent>(BIND_EVENT_CALLBACK(ImGuiPanel::OnWindowResized));
+
+	return dispatcher.Handled();
+}
+
+bool ImGuiPanel::OnKeyReleased(KeyReleasedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantCaptureKeyboard)
+	{
+		io.KeysDown[(int)e.GetKeyCode()] = false;
+		return true;
+	}
+
+	return false;
+}
+
+bool ImGuiPanel::OnKeyTyped(KeyTypedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantTextInput)
+	{
+		io.AddInputCharacter(e.GetKey());
+		return true;
+	}
+
+	return false;
+}
+
+bool ImGuiPanel::OnMousePressed(MouseButtonPressedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantCaptureMouse)
+	{
+		io.MouseDown[(int)e.GetMouseButton()] = true;
+		return true;
+	}
+
+	return false;
+}
+
+bool ImGuiPanel::OnMouseReleased(MouseButtonReleasedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantCaptureMouse)
+	{
+		io.MouseDown[(int)e.GetMouseButton()] = false;
+		return true;
+	}
+
+	return false;
+}
+
+bool ImGuiPanel::OnMouseMoved(MouseMovedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.MousePos = ImVec2((float)e.GetX(), (float)e.GetY());
+
+	return false;
+}
+
+bool ImGuiPanel::OnMouseScrolled(MouseScrolledEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+
+	if (io.WantCaptureMouse)
+	{
+		io.MouseWheel += (float)e.GetYOffset();
+		io.MouseWheelH += (float)e.GetXOffset();
+		return true;
+	}
+
+	return false;
+}
+
+bool ImGuiPanel::OnWindowResized(WindowResizedEvent& e)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
+	io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+
+	return false;
 }

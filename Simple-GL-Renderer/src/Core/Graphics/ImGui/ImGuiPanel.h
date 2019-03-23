@@ -23,6 +23,17 @@ public:
 
 private:
 
+	bool OnKeyPressed(KeyPressedEvent& e);
+	bool OnKeyReleased(KeyReleasedEvent& e);
+	bool OnKeyTyped(KeyTypedEvent& e);
+	bool OnMousePressed(MouseButtonPressedEvent& e);
+	bool OnMouseReleased(MouseButtonReleasedEvent& e);
+	bool OnMouseMoved(MouseMovedEvent& e);
+	bool OnMouseScrolled(MouseScrolledEvent& e);
+	bool OnWindowResized(WindowResizedEvent& e);
+
+private:
+
 	float m_LastFrameTime = 0.0f;
 
 	bool m_ShowMainWindow = true;

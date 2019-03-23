@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <memory>
 #include <array>
 #include <GL/glew.h>
@@ -7,6 +8,7 @@
 #include "Core/Util/Timer.h"
 #include "Core/Window/Window.h"
 #include "Core/Graphics/SceneManager.h"
+#include "Core/Input/EventDispatcher.h"
 #include "Core.h"
 
 #include "Core/Graphics/OpenGL/VertexShader.h"
